@@ -1,0 +1,1177 @@
+Location 1,Location 2,Distance_in_KM
+Arugam Bay,Nuwara Eliya,183
+Arugam Bay,Kandy,215
+Arugam Bay,Kataragama,137
+Arugam Bay,Anuradhapura,297
+Arugam Bay,Polonnaruwa,211
+Arugam Bay,Sigiriya,243
+Arugam Bay,Trincomalee,249
+Arugam Bay,Jaffna,478
+Arugam Bay,Kalpitiya,406
+Arugam Bay,Passikudah,147
+Arugam Bay,Bentota,334
+Arugam Bay,Haputale,150
+Arugam Bay,Matara,251
+Arugam Bay,Puttalam,361
+Arugam Bay,Weligama,258
+Arugam Bay,Badulla,132
+Arugam Bay,Hambantota,182
+Arugam Bay,Diyatalawa,154
+Arugam Bay,Negombo,418
+Arugam Bay,Ella,133
+Arugam Bay,Hikkaduwa,301
+Arugam Bay,Galle,279
+Arugam Bay,Bandarawela,143
+Arugam Bay,Ratnapura,249
+Arugam Bay,Knuckles,214
+Arugam Bay,Kitulgala,275
+Arugam Bay,Tangalle,220
+Arugam Bay,Maskeliya,242
+Arugam Bay,Mannar,399
+Arugam Bay,Mirissa,256
+Arugam Bay,Pottuvil,6.1
+Arugam Bay,Mullaitivu,367
+Arugam Bay,Dambulla,234
+Arugam Bay,Avissawella,289
+Arugam Bay,Kalutara,345
+Arugam Bay,Deniyaya,230
+Arugam Bay,Monaragala,71.9
+Arugam Bay,Tissamaharama,155
+Arugam Bay,Sella Kataragama,132
+Arugam Bay,Colombo,393
+Arugam Bay,Gampaha,399
+Arugam Bay,Dodanduwa,303
+Arugam Bay,Horton Plains,179
+Arugam Bay,Sinharaja,243
+Arugam Bay,Chilaw,329
+Arugam Bay,Matale,254
+Arugam Bay,Kurunegala,256
+Arugam Bay,Ambalangoda,312
+Nuwara Eliya,Kandy,95.5
+Nuwara Eliya,Kataragama,142
+Nuwara Eliya,Anuradhapura,247
+Nuwara Eliya,Polonnaruwa,185
+Nuwara Eliya,Sigiriya,193
+Nuwara Eliya,Trincomalee,289
+Nuwara Eliya,Jaffna,427
+Nuwara Eliya,Kalpitiya,262
+Nuwara Eliya,Passikudah,202
+Nuwara Eliya,Bentota,208
+Nuwara Eliya,Haputale,47.1
+Nuwara Eliya,Matara,223
+Nuwara Eliya,Puttalam,224
+Nuwara Eliya,Weligama,230
+Nuwara Eliya,Badulla,51.7
+Nuwara Eliya,Hambantota,159
+Nuwara Eliya,Diyatalawa,43.7
+Nuwara Eliya,Negombo,169
+Nuwara Eliya,Ella,56
+Nuwara Eliya,Hikkaduwa,273
+Nuwara Eliya,Galle,251
+Nuwara Eliya,Bandarawela,43.9
+Nuwara Eliya,Ratnapura,138
+Nuwara Eliya,Knuckles,116
+Nuwara Eliya,Kitulgala,71.5
+Nuwara Eliya,Tangalle,192
+Nuwara Eliya,Maskeliya,59
+Nuwara Eliya,Mannar,349
+Nuwara Eliya,Mirissa,228
+Nuwara Eliya,Pottuvil,178
+Nuwara Eliya,Mullaitivu,363
+Nuwara Eliya,Dambulla,185
+Nuwara Eliya,Avissawella,111
+Nuwara Eliya,Kalutara,178
+Nuwara Eliya,Deniyaya,202
+Nuwara Eliya,Monaragala,112
+Nuwara Eliya,Tissamaharama,142
+Nuwara Eliya,Sella Kataragama,137
+Nuwara Eliya,Colombo,167
+Nuwara Eliya,Gampaha,139
+Nuwara Eliya,Dodanduwa,275
+Nuwara Eliya,Horton Plains,23.8
+Nuwara Eliya,Sinharaja,180
+Nuwara Eliya,Chilaw,198
+Nuwara Eliya,Matale,117
+Nuwara Eliya,Kurunegala,136
+Nuwara Eliya,Ambalangoda,284
+Kandy,Kataragama,210
+Kandy,Anuradhapura,136
+Kandy,Polonnaruwa,136
+Kandy,Sigiriya,89.3
+Kandy,Trincomalee,178
+Kandy,Jaffna,316
+Kandy,Kalpitiya,169
+Kandy,Passikudah,189
+Kandy,Bentota,177
+Kandy,Haputale,123
+Kandy,Matara,252
+Kandy,Puttalam,130
+Kandy,Weligama,240
+Kandy,Badulla,116
+Kandy,Hambantota,242
+Kandy,Diyatalawa,120
+Kandy,Negombo,115
+Kandy,Ella,136
+Kandy,Hikkaduwa,211
+Kandy,Galle,221
+Kandy,Bandarawela,145
+Kandy,Ratnapura,120
+Kandy,Knuckles,39
+Kandy,Kitulgala,60
+Kandy,Tangalle,280
+Kandy,Maskeliya,82
+Kandy,Mannar,238
+Kandy,Mirissa,247
+Kandy,Pottuvil,209
+Kandy,Mullaitivu,252
+Kandy,Dambulla,72.6
+Kandy,Avissawella,86.1
+Kandy,Kalutara,152
+Kandy,Deniyaya,253
+Kandy,Monaragala,152
+Kandy,Tissamaharama,229
+Kandy,Sella Kataragama,205
+Kandy,Colombo,144
+Kandy,Gampaha,88.9
+Kandy,Dodanduwa,213
+Kandy,Horton Plains,97.4
+Kandy,Sinharaja,165
+Kandy,Chilaw,116
+Kandy,Matale,25.2
+Kandy,Kurunegala,42.8
+Kandy,Ambalangoda,199
+Kataragama,Anuradhapura,293
+Kataragama,Polonnaruwa,219
+Kataragama,Sigiriya,239
+Kataragama,Trincomalee,309
+Kataragama,Jaffna,473
+Kataragama,Kalpitiya,418
+Kataragama,Passikudah,208
+Kataragama,Bentota,202
+Kataragama,Haputale,103
+Kataragama,Matara,119
+Kataragama,Puttalam,385
+Kataragama,Weligama,126
+Kataragama,Badulla,101
+Kataragama,Hambantota,44.6
+Kataragama,Diyatalawa,107
+Kataragama,Negombo,286
+Kataragama,Ella,90
+Kataragama,Hikkaduwa,168
+Kataragama,Galle,147
+Kataragama,Bandarawela,95.9
+Kataragama,Ratnapura,139
+Kataragama,Knuckles,213
+Kataragama,Kitulgala,214
+Kataragama,Tangalle,87.6
+Kataragama,Maskeliya,174
+Kataragama,Mannar,395
+Kataragama,Mirissa,124
+Kataragama,Pottuvil,132
+Kataragama,Mullaitivu,409
+Kataragama,Dambulla,230
+Kataragama,Avissawella,178
+Kataragama,Kalutara,213
+Kataragama,Deniyaya,117
+Kataragama,Monaragala,65.6
+Kataragama,Tissamaharama,18
+Kataragama,Sella Kataragama,5.2
+Kataragama,Colombo,260
+Kataragama,Gampaha,266
+Kataragama,Dodanduwa,170
+Kataragama,Horton Plains,132
+Kataragama,Sinharaja,130
+Kataragama,Chilaw,330
+Kataragama,Matale,250
+Kataragama,Kurunegala,332
+Kataragama,Ambalangoda,180
+Anuradhapura,Polonnaruwa,105
+Anuradhapura,Sigiriya,73.5
+Anuradhapura,Trincomalee,108
+Anuradhapura,Jaffna,196
+Anuradhapura,Kalpitiya,121
+Anuradhapura,Passikudah,172
+Anuradhapura,Bentota,257
+Anuradhapura,Haputale,246
+Anuradhapura,Matara,332
+Anuradhapura,Puttalam,75.4
+Anuradhapura,Weligama,319
+Anuradhapura,Badulla,208
+Anuradhapura,Hambantota,336
+Anuradhapura,Diyatalawa,241
+Anuradhapura,Negombo,169
+Anuradhapura,Ella,240
+Anuradhapura,Hikkaduwa,291
+Anuradhapura,Galle,301
+Anuradhapura,Bandarawela,237
+Anuradhapura,Ratnapura,218
+Anuradhapura,Knuckles,160
+Anuradhapura,Kitulgala,195
+Anuradhapura,Tangalle,360
+Anuradhapura,Maskeliya,216
+Anuradhapura,Mannar,118
+Anuradhapura,Mirissa,327
+Anuradhapura,Pottuvil,289
+Anuradhapura,Mullaitivu,132
+Anuradhapura,Dambulla,63.3
+Anuradhapura,Avissawella,181
+Anuradhapura,Kalutara,231
+Anuradhapura,Deniyaya,333
+Anuradhapura,Monaragala,232
+Anuradhapura,Tissamaharama,309
+Anuradhapura,Sella Kataragama,286
+Anuradhapura,Colombo,203
+Anuradhapura,Gampaha,169
+Anuradhapura,Dodanduwa,293
+Anuradhapura,Horton Plains,263
+Anuradhapura,Sinharaja,263
+Anuradhapura,Chilaw,129
+Anuradhapura,Matale,111
+Anuradhapura,Kurunegala,109
+Anuradhapura,Ambalangoda,279
+Polonnaruwa,Sigiriya,57.9
+Polonnaruwa,Trincomalee,130
+Polonnaruwa,Jaffna,285
+Polonnaruwa,Kalpitiya,226
+Polonnaruwa,Passikudah,70.6
+Polonnaruwa,Bentota,283
+Polonnaruwa,Haputale,185
+Polonnaruwa,Matara,333
+Polonnaruwa,Puttalam,180
+Polonnaruwa,Weligama,346
+Polonnaruwa,Badulla,146
+Polonnaruwa,Hambantota,264
+Polonnaruwa,Diyatalawa,180
+Polonnaruwa,Negombo,201
+Polonnaruwa,Ella,175
+Polonnaruwa,Hikkaduwa,317
+Polonnaruwa,Galle,327
+Polonnaruwa,Bandarawela,176
+Polonnaruwa,Ratnapura,245
+Polonnaruwa,Knuckles,150
+Polonnaruwa,Kitulgala,230
+Polonnaruwa,Tangalle,302
+Polonnaruwa,Maskeliya,217
+Polonnaruwa,Mannar,207
+Polonnaruwa,Mirissa,339
+Polonnaruwa,Pottuvil,206
+Polonnaruwa,Mullaitivu,221
+Polonnaruwa,Dambulla,72
+Polonnaruwa,Avissawella,208
+Polonnaruwa,Kalutara,258
+Polonnaruwa,Deniyaya,313
+Polonnaruwa,Monaragala,161
+Polonnaruwa,Tissamaharama,238
+Polonnaruwa,Sella Kataragama,215
+Polonnaruwa,Colombo,230
+Polonnaruwa,Gampaha,195
+Polonnaruwa,Dodanduwa,319
+Polonnaruwa,Horton Plains,202
+Polonnaruwa,Sinharaja,290
+Polonnaruwa,Chilaw,199
+Polonnaruwa,Matale,111
+Polonnaruwa,Kurunegala,127
+Polonnaruwa,Ambalangoda,305
+Sigiriya,Trincomalee,98.8
+Sigiriya,Jaffna,254
+Sigiriya,Kalpitiya,187
+Sigiriya,Passikudah,125
+Sigiriya,Bentota,230
+Sigiriya,Haputale,197
+Sigiriya,Matara,305
+Sigiriya,Puttalam,142
+Sigiriya,Weligama,292
+Sigiriya,Badulla,159
+Sigiriya,Hambantota,287
+Sigiriya,Diyatalawa,192
+Sigiriya,Negombo,147
+Sigiriya,Ella,180
+Sigiriya,Hikkaduwa,264
+Sigiriya,Galle,274
+Sigiriya,Bandarawela,188
+Sigiriya,Ratnapura,191
+Sigiriya,Knuckles,110
+Sigiriya,Kitulgala,177
+Sigiriya,Tangalle,333
+Sigiriya,Maskeliya,170
+Sigiriya,Mannar,176
+Sigiriya,Mirissa,300
+Sigiriya,Pottuvil,240
+Sigiriya,Mullaitivu,190
+Sigiriya,Dambulla,16.6
+Sigiriya,Avissawella,154
+Sigiriya,Kalutara,204
+Sigiriya,Deniyaya,306
+Sigiriya,Monaragala,183
+Sigiriya,Tissamaharama,260
+Sigiriya,Sella Kataragama,237
+Sigiriya,Colombo,176
+Sigiriya,Gampaha,142
+Sigiriya,Dodanduwa,266
+Sigiriya,Horton Plains,214
+Sigiriya,Sinharaja,236
+Sigiriya,Chilaw,146
+Sigiriya,Matale,64.5
+Sigiriya,Kurunegala,73.8
+Sigiriya,Ambalangoda,251
+Trincomalee,Jaffna,233
+Trincomalee,Kalpitiya,226
+Trincomalee,Passikudah,109
+Trincomalee,Bentota,319
+Trincomalee,Haputale,283
+Trincomalee,Matara,394
+Trincomalee,Puttalam,181
+Trincomalee,Weligama,381
+Trincomalee,Badulla,244
+Trincomalee,Hambantota,354
+Trincomalee,Diyatalawa,278
+Trincomalee,Negombo,236
+Trincomalee,Ella,270
+Trincomalee,Hikkaduwa,353
+Trincomalee,Galle,362
+Trincomalee,Bandarawela,274
+Trincomalee,Ratnapura,280
+Trincomalee,Knuckles,200
+Trincomalee,Kitulgala,266
+Trincomalee,Tangalle,422
+Trincomalee,Maskeliya,259
+Trincomalee,Mannar,174
+Trincomalee,Mirissa,389
+Trincomalee,Pottuvil,243
+Trincomalee,Mullaitivu,119
+Trincomalee,Dambulla,106
+Trincomalee,Avissawella,243
+Trincomalee,Kalutara,293
+Trincomalee,Deniyaya,395
+Trincomalee,Monaragala,251
+Trincomalee,Tissamaharama,328
+Trincomalee,Sella Kataragama,305
+Trincomalee,Colombo,265
+Trincomalee,Gampaha,231
+Trincomalee,Dodanduwa,355
+Trincomalee,Horton Plains,300
+Trincomalee,Sinharaja,325
+Trincomalee,Chilaw,235
+Trincomalee,Matale,153
+Trincomalee,Kurunegala,163
+Trincomalee,Ambalangoda,340
+Jaffna,Kalpitiya,314
+Jaffna,Passikudah,339
+Jaffna,Bentota,456
+Jaffna,Haputale,426
+Jaffna,Matara,531
+Jaffna,Puttalam,269
+Jaffna,Weligama,519
+Jaffna,Badulla,387
+Jaffna,Hambantota,515
+Jaffna,Diyatalawa,421
+Jaffna,Negombo,374
+Jaffna,Ella,410
+Jaffna,Hikkaduwa,490
+Jaffna,Galle,500
+Jaffna,Bandarawela,417
+Jaffna,Ratnapura,418
+Jaffna,Knuckles,340
+Jaffna,Kitulgala,403
+Jaffna,Tangalle,559
+Jaffna,Maskeliya,396
+Jaffna,Mannar,116
+Jaffna,Mirissa,526
+Jaffna,Pottuvil,469
+Jaffna,Mullaitivu,114
+Jaffna,Dambulla,243
+Jaffna,Avissawella,380
+Jaffna,Kalutara,431
+Jaffna,Deniyaya,532
+Jaffna,Monaragala,412
+Jaffna,Tissamaharama,489
+Jaffna,Sella Kataragama,466
+Jaffna,Colombo,403
+Jaffna,Gampaha,368
+Jaffna,Dodanduwa,492
+Jaffna,Horton Plains,443
+Jaffna,Sinharaja,463
+Jaffna,Chilaw,322
+Jaffna,Matale,291
+Jaffna,Kurunegala,300
+Jaffna,Ambalangoda,478
+Kalpitiya,Passikudah,284
+Kalpitiya,Bentota,243
+Kalpitiya,Haputale,325
+Kalpitiya,Matara,318
+Kalpitiya,Puttalam,47.3
+Kalpitiya,Weligama,306
+Kalpitiya,Badulla,311
+Kalpitiya,Hambantota,402
+Kalpitiya,Diyatalawa,345
+Kalpitiya,Negombo,132
+Kalpitiya,Ella,335
+Kalpitiya,Hikkaduwa,277
+Kalpitiya,Galle,287
+Kalpitiya,Bandarawela,340
+Kalpitiya,Ratnapura,235
+Kalpitiya,Knuckles,200
+Kalpitiya,Kitulgala,211
+Kalpitiya,Tangalle,346
+Kalpitiya,Maskeliya,249
+Kalpitiya,Mannar,200
+Kalpitiya,Mirissa,313
+Kalpitiya,Pottuvil,392
+Kalpitiya,Mullaitivu,250
+Kalpitiya,Dambulla,166
+Kalpitiya,Avissawella,198
+Kalpitiya,Kalutara,218
+Kalpitiya,Deniyaya,319
+Kalpitiya,Monaragala,335
+Kalpitiya,Tissamaharama,413
+Kalpitiya,Sella Kataragama,422
+Kalpitiya,Colombo,167
+Kalpitiya,Gampaha,156
+Kalpitiya,Dodanduwa,279
+Kalpitiya,Horton Plains,259
+Kalpitiya,Sinharaja,286
+Kalpitiya,Chilaw,89.1
+Kalpitiya,Matale,175
+Kalpitiya,Kurunegala,126
+Kalpitiya,Ambalangoda,265
+Passikudah,Bentota,350
+Passikudah,Haputale,201
+Passikudah,Matara,322
+Passikudah,Puttalam,248
+Passikudah,Weligama,329
+Passikudah,Badulla,162
+Passikudah,Hambantota,253
+Passikudah,Diyatalawa,196
+Passikudah,Negombo,268
+Passikudah,Ella,185
+Passikudah,Hikkaduwa,372
+Passikudah,Galle,350
+Passikudah,Bandarawela,192
+Passikudah,Ratnapura,312
+Passikudah,Knuckles,192
+Passikudah,Kitulgala,250
+Passikudah,Tangalle,291
+Passikudah,Maskeliya,257
+Passikudah,Mannar,274
+Passikudah,Mirissa,328
+Passikudah,Pottuvil,142
+Passikudah,Mullaitivu,227
+Passikudah,Dambulla,139
+Passikudah,Avissawella,275
+Passikudah,Kalutara,325
+Passikudah,Deniyaya,301
+Passikudah,Monaragala,149
+Passikudah,Tissamaharama,226
+Passikudah,Sella Kataragama,203
+Passikudah,Colombo,297
+Passikudah,Gampaha,262
+Passikudah,Dodanduwa,374
+Passikudah,Horton Plains,218
+Passikudah,Sinharaja,314
+Passikudah,Chilaw,266
+Passikudah,Matale,178
+Passikudah,Kurunegala,194
+Passikudah,Ambalangoda,383
+Bentota,Haputale,171
+Bentota,Matara,103
+Bentota,Puttalam,211
+Bentota,Weligama,90.6
+Bentota,Badulla,275
+Bentota,Hambantota,187
+Bentota,Diyatalawa,273
+Bentota,Negombo,112
+Bentota,Ella,220
+Bentota,Hikkaduwa,36.8
+Bentota,Galle,71.9
+Bentota,Bandarawela,262
+Bentota,Ratnapura,104
+Bentota,Knuckles,232
+Bentota,Kitulgala,144
+Bentota,Tangalle,131
+Bentota,Maskeliya,182
+Bentota,Mannar,381
+Bentota,Mirissa,98
+Bentota,Pottuvil,334
+Bentota,Mullaitivu,395
+Bentota,Dambulla,215
+Bentota,Avissawella,102
+Bentota,Kalutara,21.7
+Bentota,Deniyaya,104
+Bentota,Monaragala,268
+Bentota,Tissamaharama,198
+Bentota,Sella Kataragama,207
+Bentota,Colombo,86.3
+Bentota,Gampaha,92.3
+Bentota,Dodanduwa,42.1
+Bentota,Horton Plains,173
+Bentota,Sinharaja,82.9
+Bentota,Chilaw,156
+Bentota,Matale,209
+Bentota,Kurunegala,158
+Bentota,Ambalangoda,24.1
+Haputale,Matara,193
+Haputale,Puttalam,311
+Haputale,Weligama,200
+Haputale,Badulla,39.3
+Haputale,Hambantota,129
+Haputale,Diyatalawa,8.9
+Haputale,Negombo,212
+Haputale,Ella,25
+Haputale,Hikkaduwa,243
+Haputale,Galle,221
+Haputale,Bandarawela,13.2
+Haputale,Ratnapura,93
+Haputale,Knuckles,170
+Haputale,Kitulgala,115
+Haputale,Tangalle,162
+Haputale,Maskeliya,102
+Haputale,Mannar,349
+Haputale,Mirissa,198
+Haputale,Pottuvil,153
+Haputale,Mullaitivu,363
+Haputale,Dambulla,184
+Haputale,Avissawella,132
+Haputale,Kalutara,165
+Haputale,Deniyaya,149
+Haputale,Monaragala,86.8
+Haputale,Tissamaharama,112
+Haputale,Sella Kataragama,107
+Haputale,Colombo,187
+Haputale,Gampaha,169
+Haputale,Dodanduwa,245
+Haputale,Horton Plains,29.7
+Haputale,Sinharaja,136
+Haputale,Chilaw,237
+Haputale,Matale,175
+Haputale,Kurunegala,211
+Haputale,Ambalangoda,254
+Matara,Puttalam,282
+Matara,Weligama,16.6
+Matara,Badulla,188
+Matara,Hambantota,100
+Matara,Diyatalawa,186
+Matara,Negombo,183
+Matara,Ella,169
+Matara,Hikkaduwa,65.3
+Matara,Galle,43.7
+Matara,Bandarawela,175
+Matara,Ratnapura,175
+Matara,Knuckles,320
+Matara,Kitulgala,214
+Matara,Tangalle,44.5
+Matara,Maskeliya,196
+Matara,Mannar,452
+Matara,Mirissa,12.1
+Matara,Pottuvil,247
+Matara,Mullaitivu,466
+Matara,Dambulla,286
+Matara,Avissawella,173
+Matara,Kalutara,110
+Matara,Deniyaya,67.7
+Matara,Monaragala,181
+Matara,Tissamaharama,112
+Matara,Sella Kataragama,121
+Matara,Colombo,157
+Matara,Gampaha,163
+Matara,Dodanduwa,67.1
+Matara,Horton Plains,212
+Matara,Sinharaja,80.5
+Matara,Chilaw,227
+Matara,Matale,280
+Matara,Kurunegala,229
+Matara,Ambalangoda,76.6
+Puttalam,Weligama,274
+Puttalam,Badulla,266
+Puttalam,Hambantota,370
+Puttalam,Diyatalawa,300
+Puttalam,Negombo,99.5
+Puttalam,Ella,270
+Puttalam,Hikkaduwa,245
+Puttalam,Galle,255
+Puttalam,Bandarawela,296
+Puttalam,Ratnapura,197
+Puttalam,Knuckles,162
+Puttalam,Kitulgala,173
+Puttalam,Tangalle,314
+Puttalam,Maskeliya,211
+Puttalam,Mannar,156
+Puttalam,Mirissa,281
+Puttalam,Pottuvil,348
+Puttalam,Mullaitivu,205
+Puttalam,Dambulla,122
+Puttalam,Avissawella,160
+Puttalam,Kalutara,186
+Puttalam,Deniyaya,287
+Puttalam,Monaragala,291
+Puttalam,Tissamaharama,381
+Puttalam,Sella Kataragama,390
+Puttalam,Colombo,135
+Puttalam,Gampaha,124
+Puttalam,Dodanduwa,247
+Puttalam,Horton Plains,221
+Puttalam,Sinharaja,253
+Puttalam,Chilaw,57
+Puttalam,Matale,137
+Puttalam,Kurunegala,87.8
+Puttalam,Ambalangoda,233
+Weligama,Badulla,198
+Weligama,Hambantota,110
+Weligama,Diyatalawa,196
+Weligama,Negombo,173
+Weligama,Ella,177
+Weligama,Hikkaduwa,55.8
+Weligama,Galle,34.2
+Weligama,Bandarawela,185
+Weligama,Ratnapura,165
+Weligama,Knuckles,295
+Weligama,Kitulgala,205
+Weligama,Tangalle,54.4
+Weligama,Maskeliya,206
+Weligama,Mannar,442
+Weligama,Mirissa,8
+Weligama,Pottuvil,257
+Weligama,Mullaitivu,456
+Weligama,Dambulla,276
+Weligama,Avissawella,164
+Weligama,Kalutara,100
+Weligama,Deniyaya,66
+Weligama,Monaragala,191
+Weligama,Tissamaharama,122
+Weligama,Sella Kataragama,130
+Weligama,Colombo,148
+Weligama,Gampaha,154
+Weligama,Dodanduwa,57.7
+Weligama,Horton Plains,222
+Weligama,Sinharaja,78.8
+Weligama,Chilaw,218
+Weligama,Matale,270
+Weligama,Kurunegala,220
+Weligama,Ambalangoda,67.2
+Badulla,Hambantota,127
+Badulla,Diyatalawa,34.6
+Badulla,Negombo,228
+Badulla,Ella,22
+Badulla,Hikkaduwa,240
+Badulla,Galle,219
+Badulla,Bandarawela,30.2
+Badulla,Ratnapura,130
+Badulla,Knuckles,129
+Badulla,Kitulgala,123
+Badulla,Tangalle,159
+Badulla,Maskeliya,111
+Badulla,Mannar,310
+Badulla,Mirissa,196
+Badulla,Pottuvil,127
+Badulla,Mullaitivu,324
+Badulla,Dambulla,145
+Badulla,Avissawella,169
+Badulla,Kalutara,285
+Badulla,Deniyaya,169
+Badulla,Monaragala,60.9
+Badulla,Tissamaharama,110
+Badulla,Sella Kataragama,95.7
+Badulla,Colombo,332
+Badulla,Gampaha,223
+Badulla,Dodanduwa,242
+Badulla,Horton Plains,56.4
+Badulla,Sinharaja,182
+Badulla,Chilaw,229
+Badulla,Matale,137
+Badulla,Kurunegala,156
+Badulla,Ambalangoda,252
+Hambantota,Diyatalawa,128
+Hambantota,Negombo,267
+Hambantota,Ella,105
+Hambantota,Hikkaduwa,150
+Hambantota,Galle,128
+Hambantota,Bandarawela,117
+Hambantota,Ratnapura,127
+Hambantota,Knuckles,256
+Hambantota,Kitulgala,202
+Hambantota,Tangalle,44.7
+Hambantota,Maskeliya,169
+Hambantota,Mannar,452
+Hambantota,Mirissa,106
+Hambantota,Pottuvil,188
+Hambantota,Mullaitivu,466
+Hambantota,Dambulla,287
+Hambantota,Avissawella,258
+Hambantota,Kalutara,194
+Hambantota,Deniyaya,98.5
+Hambantota,Monaragala,122
+Hambantota,Tissamaharama,28.6
+Hambantota,Sella Kataragama,61.8
+Hambantota,Colombo,242
+Hambantota,Gampaha,248
+Hambantota,Dodanduwa,152
+Hambantota,Horton Plains,153
+Hambantota,Sinharaja,111
+Hambantota,Chilaw,312
+Hambantota,Matale,364
+Hambantota,Kurunegala,314
+Hambantota,Ambalangoda,161
+Diyatalawa,Negombo,219
+Diyatalawa,Ella,20
+Diyatalawa,Hikkaduwa,238
+Diyatalawa,Galle,216
+Diyatalawa,Bandarawela,8.4
+Diyatalawa,Ratnapura,99.4
+Diyatalawa,Knuckles,162
+Diyatalawa,Kitulgala,111
+Diyatalawa,Tangalle,157
+Diyatalawa,Maskeliya,98.7
+Diyatalawa,Mannar,344
+Diyatalawa,Mirissa,194
+Diyatalawa,Pottuvil,148
+Diyatalawa,Mullaitivu,358
+Diyatalawa,Dambulla,179
+Diyatalawa,Avissawella,139
+Diyatalawa,Kalutara,172
+Diyatalawa,Deniyaya,167
+Diyatalawa,Monaragala,81.9
+Diyatalawa,Tissamaharama,107
+Diyatalawa,Sella Kataragama,102
+Diyatalawa,Colombo,193
+Diyatalawa,Gampaha,175
+Diyatalawa,Dodanduwa,240
+Diyatalawa,Horton Plains,26.3
+Diyatalawa,Sinharaja,142
+Diyatalawa,Chilaw,243
+Diyatalawa,Matale,171
+Diyatalawa,Kurunegala,189
+Diyatalawa,Ambalangoda,249
+Negombo,Ella,225
+Negombo,Hikkaduwa,146
+Negombo,Galle,155
+Negombo,Bandarawela,223
+Negombo,Ratnapura,123
+Negombo,Knuckles,148
+Negombo,Kitulgala,88.2
+Negombo,Tangalle,215
+Negombo,Maskeliya,126
+Negombo,Mannar,252
+Negombo,Mirissa,181
+Negombo,Pottuvil,417
+Negombo,Mullaitivu,311
+Negombo,Dambulla,131
+Negombo,Avissawella,72
+Negombo,Kalutara,86
+Negombo,Deniyaya,188
+Negombo,Monaragala,351
+Negombo,Tissamaharama,282
+Negombo,Sella Kataragama,291
+Negombo,Colombo,35.1
+Negombo,Gampaha,26.6
+Negombo,Dodanduwa,148
+Negombo,Horton Plains,178
+Negombo,Sinharaja,154
+Negombo,Chilaw,44.3
+Negombo,Matale,125
+Negombo,Kurunegala,74.3
+Negombo,Ambalangoda,133
+Ella,Hikkaduwa,219
+Ella,Galle,198
+Ella,Bandarawela,15
+Ella,Ratnapura,115
+Ella,Knuckles,151
+Ella,Kitulgala,128
+Ella,Tangalle,139
+Ella,Maskeliya,115
+Ella,Mannar,331
+Ella,Mirissa,174
+Ella,Pottuvil,129
+Ella,Mullaitivu,345
+Ella,Dambulla,166
+Ella,Avissawella,154
+Ella,Kalutara,190
+Ella,Deniyaya,149
+Ella,Monaragala,63
+Ella,Tissamaharama,88
+Ella,Sella Kataragama,83
+Ella,Colombo,200
+Ella,Gampaha,192
+Ella,Dodanduwa,221
+Ella,Horton Plains,45
+Ella,Sinharaja,158
+Ella,Chilaw,250
+Ella,Matale,158
+Ella,Kurunegala,177
+Ella,Ambalangoda,230
+Hikkaduwa,Galle,19.6
+Hikkaduwa,Bandarawela,226
+Hikkaduwa,Ratnapura,136
+Hikkaduwa,Knuckles,263
+Hikkaduwa,Kitulgala,176
+Hikkaduwa,Tangalle,95.6
+Hikkaduwa,Maskeliya,214
+Hikkaduwa,Mannar,413
+Hikkaduwa,Mirissa,62.5
+Hikkaduwa,Pottuvil,298
+Hikkaduwa,Mullaitivu,427
+Hikkaduwa,Dambulla,247
+Hikkaduwa,Avissawella,134
+Hikkaduwa,Kalutara,70.9
+Hikkaduwa,Deniyaya,105
+Hikkaduwa,Monaragala,232
+Hikkaduwa,Tissamaharama,163
+Hikkaduwa,Sella Kataragama,172
+Hikkaduwa,Colombo,118
+Hikkaduwa,Gampaha,124
+Hikkaduwa,Dodanduwa,6.8
+Hikkaduwa,Horton Plains,263
+Hikkaduwa,Sinharaja,79.5
+Hikkaduwa,Chilaw,188
+Hikkaduwa,Matale,241
+Hikkaduwa,Kurunegala,190
+Hikkaduwa,Ambalangoda,15
+Galle,Bandarawela,207
+Galle,Ratnapura,147
+Galle,Knuckles,274
+Galle,Kitulgala,187
+Galle,Tangalle,76.3
+Galle,Maskeliya,225
+Galle,Mannar,424
+Galle,Mirissa,35.4
+Galle,Pottuvil,279
+Galle,Mullaitivu,438
+Galle,Dambulla,258
+Galle,Avissawella,146
+Galle,Kalutara,82.2
+Galle,Deniyaya,85.3
+Galle,Monaragala,213
+Galle,Tissamaharama,144
+Galle,Sella Kataragama,152
+Galle,Colombo,130
+Galle,Gampaha,136
+Galle,Dodanduwa,14
+Galle,Horton Plains,244
+Galle,Sinharaja,80.3
+Galle,Chilaw,199
+Galle,Matale,252
+Galle,Kurunegala,202
+Galle,Ambalangoda,33.2
+Bandarawela,Ratnapura,104
+Bandarawela,Knuckles,159
+Bandarawela,Kitulgala,116
+Bandarawela,Tangalle,146
+Bandarawela,Maskeliya,104
+Bandarawela,Mannar,339
+Bandarawela,Mirissa,182
+Bandarawela,Pottuvil,137
+Bandarawela,Mullaitivu,353
+Bandarawela,Dambulla,174
+Bandarawela,Avissawella,143
+Bandarawela,Kalutara,271
+Bandarawela,Deniyaya,156
+Bandarawela,Monaragala,70.9
+Bandarawela,Tissamaharama,96.3
+Bandarawela,Sella Kataragama,90.9
+Bandarawela,Colombo,197
+Bandarawela,Gampaha,179
+Bandarawela,Dodanduwa,229
+Bandarawela,Horton Plains,33.8
+Bandarawela,Sinharaja,146
+Bandarawela,Chilaw,248
+Bandarawela,Matale,166
+Bandarawela,Kurunegala,185
+Bandarawela,Ambalangoda,238
+Ratnapura,Knuckles,165
+Ratnapura,Kitulgala,75.1
+Ratnapura,Tangalle,125
+Ratnapura,Maskeliya,113
+Ratnapura,Mannar,341
+Ratnapura,Mirissa,175
+Ratnapura,Pottuvil,244
+Ratnapura,Mullaitivu,355
+Ratnapura,Dambulla,175
+Ratnapura,Avissawella,39.2
+Ratnapura,Kalutara,78.1
+Ratnapura,Deniyaya,125
+Ratnapura,Monaragala,178
+Ratnapura,Tissamaharama,133
+Ratnapura,Sella Kataragama,142
+Ratnapura,Colombo,84.9
+Ratnapura,Gampaha,75.5
+Ratnapura,Dodanduwa,141
+Ratnapura,Horton Plains,93.4
+Ratnapura,Sinharaja,52.6
+Ratnapura,Chilaw,144
+Ratnapura,Matale,169
+Ratnapura,Kurunegala,118
+Ratnapura,Ambalangoda,127
+Knuckles,Kitulgala,101
+Knuckles,Tangalle,305
+Knuckles,Maskeliya,123
+Knuckles,Mannar,258
+Knuckles,Mirissa,300
+Knuckles,Pottuvil,211
+Knuckles,Mullaitivu,273
+Knuckles,Dambulla,93
+Knuckles,Avissawella,154
+Knuckles,Kalutara,205
+Knuckles,Deniyaya,311
+Knuckles,Monaragala,154
+Knuckles,Tissamaharama,231
+Knuckles,Sella Kataragama,208
+Knuckles,Colombo,177
+Knuckles,Gampaha,142
+Knuckles,Dodanduwa,267
+Knuckles,Horton Plains,151
+Knuckles,Sinharaja,208
+Knuckles,Chilaw,153
+Knuckles,Matale,45
+Knuckles,Kurunegala,74
+Knuckles,Ambalangoda,253
+Kitulgala,Tangalle,239
+Kitulgala,Maskeliya,38.1
+Kitulgala,Mannar,319
+Kitulgala,Mirissa,206
+Kitulgala,Pottuvil,248
+Kitulgala,Mullaitivu,333
+Kitulgala,Dambulla,153
+Kitulgala,Avissawella,39.7
+Kitulgala,Kalutara,107
+Kitulgala,Deniyaya,192
+Kitulgala,Monaragala,182
+Kitulgala,Tissamaharama,207
+Kitulgala,Sella Kataragama,216
+Kitulgala,Colombo,95.9
+Kitulgala,Gampaha,67.4
+Kitulgala,Dodanduwa,172
+Kitulgala,Horton Plains,89.4
+Kitulgala,Sinharaja,118
+Kitulgala,Chilaw,126
+Kitulgala,Matale,84.6
+Kitulgala,Kurunegala,89.4
+Kitulgala,Ambalangoda,158
+Tangalle,Maskeliya,172
+Tangalle,Mannar,480
+Tangalle,Mirissa,49.8
+Tangalle,Pottuvil,224
+Tangalle,Mullaitivu,495
+Tangalle,Dambulla,315
+Tangalle,Avissawella,202
+Tangalle,Kalutara,139
+Tangalle,Deniyaya,65.4
+Tangalle,Monaragala,158
+Tangalle,Tissamaharama,70
+Tangalle,Sella Kataragama,97.2
+Tangalle,Colombo,186
+Tangalle,Gampaha,192
+Tangalle,Dodanduwa,96
+Tangalle,Horton Plains,188
+Tangalle,Sinharaja,78.2
+Tangalle,Chilaw,256
+Tangalle,Matale,309
+Tangalle,Kurunegala,258
+Tangalle,Ambalangoda,106
+Maskeliya,Mannar,357
+Maskeliya,Mirissa,202
+Maskeliya,Pottuvil,235
+Maskeliya,Mullaitivu,371
+Maskeliya,Dambulla,191
+Maskeliya,Avissawella,77.7
+Maskeliya,Kalutara,145
+Maskeliya,Deniyaya,166
+Maskeliya,Monaragala,169
+Maskeliya,Tissamaharama,169
+Maskeliya,Sella Kataragama,178
+Maskeliya,Colombo,134
+Maskeliya,Gampaha,105
+Maskeliya,Dodanduwa,210
+Maskeliya,Horton Plains,76.9
+Maskeliya,Sinharaja,153
+Maskeliya,Chilaw,164
+Maskeliya,Matale,107
+Maskeliya,Kurunegala,127
+Maskeliya,Ambalangoda,196
+Mannar,Mirissa,449
+Mannar,Pottuvil,391
+Mannar,Mullaitivu,151
+Mannar,Dambulla,166
+Mannar,Avissawella,303
+Mannar,Kalutara,353
+Mannar,Deniyaya,455
+Mannar,Monaragala,334
+Mannar,Tissamaharama,411
+Mannar,Sella Kataragama,388
+Mannar,Colombo,325
+Mannar,Gampaha,291
+Mannar,Dodanduwa,415
+Mannar,Horton Plains,366
+Mannar,Sinharaja,385
+Mannar,Chilaw,221
+Mannar,Matale,213
+Mannar,Kurunegala,223
+Mannar,Ambalangoda,400
+Mirissa,Pottuvil,256
+Mirissa,Mullaitivu,464
+Mirissa,Dambulla,284
+Mirissa,Avissawella,171
+Mirissa,Kalutara,108
+Mirissa,Deniyaya,69.1
+Mirissa,Monaragala,190
+Mirissa,Tissamaharama,121
+Mirissa,Sella Kataragama,129
+Mirissa,Colombo,155
+Mirissa,Gampaha,161
+Mirissa,Dodanduwa,65.1
+Mirissa,Horton Plains,221
+Mirissa,Sinharaja,81.9
+Mirissa,Chilaw,225
+Mirissa,Matale,278
+Mirissa,Kurunegala,227
+Mirissa,Ambalangoda,74.5
+Pottuvil,Mullaitivu,361
+Pottuvil,Dambulla,229
+Pottuvil,Avissawella,283
+Pottuvil,Kalutara,340
+Pottuvil,Deniyaya,224
+Pottuvil,Monaragala,66.5
+Pottuvil,Tissamaharama,150
+Pottuvil,Sella Kataragama,127
+Pottuvil,Colombo,387
+Pottuvil,Gampaha,393
+Pottuvil,Dodanduwa,297
+Pottuvil,Horton Plains,174
+Pottuvil,Sinharaja,237
+Pottuvil,Chilaw,324
+Pottuvil,Matale,248
+Pottuvil,Kurunegala,250
+Pottuvil,Ambalangoda,307
+Mullaitivu,Dambulla,180
+Mullaitivu,Avissawella,317
+Mullaitivu,Kalutara,367
+Mullaitivu,Deniyaya,469
+Mullaitivu,Monaragala,349
+Mullaitivu,Tissamaharama,425
+Mullaitivu,Sella Kataragama,402
+Mullaitivu,Colombo,339
+Mullaitivu,Gampaha,305
+Mullaitivu,Dodanduwa,429
+Mullaitivu,Horton Plains,380
+Mullaitivu,Sinharaja,399
+Mullaitivu,Chilaw,259
+Mullaitivu,Matale,228
+Mullaitivu,Kurunegala,237
+Mullaitivu,Ambalangoda,415
+Dambulla,Avissawella,137
+Dambulla,Kalutara,188
+Dambulla,Deniyaya,289
+Dambulla,Monaragala,170
+Dambulla,Tissamaharama,247
+Dambulla,Sella Kataragama,224
+Dambulla,Colombo,160
+Dambulla,Gampaha,125
+Dambulla,Dodanduwa,249
+Dambulla,Horton Plains,201
+Dambulla,Sinharaja,219
+Dambulla,Chilaw,129
+Dambulla,Matale,47.8
+Dambulla,Kurunegala,57.1
+Dambulla,Ambalangoda,235
+Avissawella,Kalutara,67
+Avissawella,Deniyaya,145
+Avissawella,Monaragala,217
+Avissawella,Tissamaharama,173
+Avissawella,Sella Kataragama,181
+Avissawella,Colombo,45.6
+Avissawella,Gampaha,38.2
+Avissawella,Dodanduwa,133
+Avissawella,Horton Plains,131
+Avissawella,Sinharaja,84.1
+Avissawella,Chilaw,107
+Avissawella,Matale,132
+Avissawella,Kurunegala,81
+Avissawella,Ambalangoda,118
+Kalutara,Deniyaya,114
+Kalutara,Monaragala,277
+Kalutara,Tissamaharama,208
+Kalutara,Sella Kataragama,217
+Kalutara,Colombo,43.4
+Kalutara,Gampaha,65.9
+Kalutara,Dodanduwa,73.5
+Kalutara,Horton Plains,165
+Kalutara,Sinharaja,80
+Kalutara,Chilaw,130
+Kalutara,Matale,183
+Kalutara,Kurunegala,132
+Kalutara,Ambalangoda,43.6
+Deniyaya,Monaragala,151
+Deniyaya,Tissamaharama,110
+Deniyaya,Sella Kataragama,118
+Deniyaya,Colombo,166
+Deniyaya,Gampaha,172
+Deniyaya,Dodanduwa,106
+Deniyaya,Horton Plains,143
+Deniyaya,Sinharaja,12.9
+Deniyaya,Chilaw,236
+Deniyaya,Matale,289
+Deniyaya,Kurunegala,238
+Deniyaya,Ambalangoda,115
+Monaragala,Tissamaharama,83.8
+Monaragala,Sella Kataragama,60.7
+Monaragala,Colombo,321
+Monaragala,Gampaha,327
+Monaragala,Dodanduwa,231
+Monaragala,Horton Plains,108
+Monaragala,Sinharaja,171
+Monaragala,Chilaw,267
+Monaragala,Matale,191
+Monaragala,Kurunegala,193
+Monaragala,Ambalangoda,241
+Tissamaharama,Sella Kataragama,23.2
+Tissamaharama,Colombo,256
+Tissamaharama,Gampaha,262
+Tissamaharama,Dodanduwa,166
+Tissamaharama,Horton Plains,134
+Tissamaharama,Sinharaja,126
+Tissamaharama,Chilaw,326
+Tissamaharama,Matale,268
+Tissamaharama,Kurunegala,328
+Tissamaharama,Ambalangoda,176
+Sella Kataragama,Colombo,266
+Sella Kataragama,Gampaha,272
+Sella Kataragama,Dodanduwa,176
+Sella Kataragama,Horton Plains,127
+Sella Kataragama,Sinharaja,135
+Sella Kataragama,Chilaw,336
+Sella Kataragama,Matale,245
+Sella Kataragama,Kurunegala,338
+Sella Kataragama,Ambalangoda,185
+Colombo,Gampaha,34.8
+Colombo,Dodanduwa,138
+Colombo,Horton Plains,189
+Colombo,Sinharaja,144
+Colombo,Chilaw,79.8
+Colombo,Matale,155
+Colombo,Kurunegala,104
+Colombo,Ambalangoda,124
+Gampaha,Dodanduwa,127
+Gampaha,Horton Plains,157
+Gampaha,Sinharaja,133
+Gampaha,Chilaw,69.2
+Gampaha,Matale,119
+Gampaha,Kurunegala,68.7
+Gampaha,Ambalangoda,113
+Dodanduwa,Horton Plains,257
+Dodanduwa,Sinharaja,83
+Dodanduwa,Chilaw,192
+Dodanduwa,Matale,244
+Dodanduwa,Kurunegala,194
+Dodanduwa,Ambalangoda,20
+Horton Plains,Sinharaja,136
+Horton Plains,Chilaw,216
+Horton Plains,Matale,140
+Horton Plains,Kurunegala,159
+Horton Plains,Ambalangoda,275
+Sinharaja,Chilaw,197
+Sinharaja,Matale,212
+Sinharaja,Kurunegala,161
+Sinharaja,Ambalangoda,103
+Chilaw,Matale,130
+Chilaw,Kurunegala,72.5
+Chilaw,Ambalangoda,178
+Matale,Kurunegala,52.1
+Matale,Ambalangoda,229
+Kurunegala,Ambalangoda,178
