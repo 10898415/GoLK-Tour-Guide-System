@@ -1,58 +1,115 @@
-from fastapi import APIRouter, Query
-import openai
-from neo4j import GraphDatabase
-import os
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel
+from openai import OpenAI
 from dotenv import load_dotenv
+import os
+from datetime import datetime
+import uuid
+from typing import Dict, List
 
-load_dotenv()  # Load API keys from .env file
+# In-memory storage for chat histories
+chat_histories: Dict[str, Dict[str, List[str]]] = {}
 
+# Create FastAPI router
 router = APIRouter()
 
-# OpenAI API Configuration
-openai.api_key = os.getenv("OPENAI_API_KEY")
+class Settings(BaseModel):
+    language: str
+    politeness_level: str
+    formality: str
+    creativity: float
+    response_length: str
 
-# Neo4j AuraDB Configuration
-NEO4J_URI = os.getenv("NEO4J_URI")
-NEO4J_USER = os.getenv("NEO4J_USER")
-NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
+class Question(BaseModel):
+    question: str
+    session_id: str
+    settings: Settings
+    time: str = None
+    date: str = None
+    question_history: List[str] = []
+    answer_history: List[str] = []
 
-class Neo4jChatbot:
-    def __init__(self, uri, user, password):
-        self.driver = GraphDatabase.driver(uri, auth=(user, password))
+# Load environment variables
+load_dotenv()
 
-    def close(self):
-        self.driver.close()
+# Get environment variables
+openai_api_key = os.getenv("OPENAI_API_KEY")
+deployment = os.getenv("DEPLOYMENT_NAME", "gpt-3.5-turbo")
 
-    def query_neo4j(self, user_query):
-        with self.driver.session() as session:
-            response = session.run(
-                """
-                MATCH (a:Area)-[:HAS_PLACE]->(p:Place)
-                WHERE a.name CONTAINS $query OR p.name CONTAINS $query
-                RETURN a.name AS area, p.name AS place
-                LIMIT 5
-                """, query=user_query)
-            return [record for record in response]
+# Initialize OpenAI client
+client = OpenAI(api_key=openai_api_key)
 
-chatbot = Neo4jChatbot(NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD)
-
-@router.get("/chatbot")
-def ask_chatbot(query: str = Query(..., description="Ask Tour Mate a question")):
-    
-    # Step 1: Process User Query using OpenAI
-    openai_response = openai.ChatCompletion.create(
-        model="gpt-3.5",
-        messages=[{"role": "system", "content": "You are a travel guide assistant for Sri Lanka."},
-                  {"role": "user", "content": query}]
-    )
-    ai_response = openai_response["choices"][0]["message"]["content"]
-
-    # Step 2: Query Neo4j AuraDB for relevant places
-    results = chatbot.query_neo4j(query)
-    places_info = [f"Area: {record['area']}, Place: {record['place']}" for record in results]
-
-    # Step 3: Return combined response
-    return {
-        "AI Response": ai_response,
-        "Places Recommended": places_info if places_info else "No specific places found."
+@router.post("/start_session")
+async def start_session():
+    """Initialize a new chat session"""
+    session_id = str(uuid.uuid4())
+    chat_histories[session_id] = {
+        "questions": [],
+        "answers": []
     }
+    return {"session_id": session_id}
+
+@router.post("/chat")
+async def chat(question: Question):
+    """Handle chat interactions"""
+    try:
+        session_id = question.session_id
+        user_question = question.question
+
+        # Validate session
+        if session_id not in chat_histories:
+            raise HTTPException(status_code=400, detail="Invalid session ID")
+
+        # Add question to history
+        chat_histories[session_id]["questions"].append(user_question)
+
+        # Create system prompt based on settings
+        system_prompt = f"""You are a helpful AI tour guide for Sri Lanka.
+        Language: {question.settings.language}
+        Politeness: {question.settings.politeness_level}
+        Formality: {question.settings.formality}
+        Response Length: {question.settings.response_length}
+        
+        Provide information about Sri Lankan tourism, culture, history, and attractions.
+        Be accurate, engaging, and respectful of local customs."""
+
+        # Generate response using OpenAI
+        response = client.chat.completions.create(
+            model=deployment,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_question}
+            ],
+            temperature=question.settings.creativity
+        )
+
+        answer = response.choices[0].message.content
+        chat_histories[session_id]["answers"].append(answer)
+
+        # Return response with metadata
+        return {
+            "session_id": session_id,
+            "response": answer,
+            "timestamp": datetime.now().isoformat(),
+            "question_count": len(chat_histories[session_id]["questions"])
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/history/{session_id}")
+async def get_chat_history(session_id: str):
+    """Retrieve chat history for a session"""
+    if session_id not in chat_histories:
+        raise HTTPException(status_code=404, detail="Session not found")
+    
+    return chat_histories[session_id]
+
+@router.delete("/session/{session_id}")
+async def end_session(session_id: str):
+    """End a chat session and clear its history"""
+    if session_id not in chat_histories:
+        raise HTTPException(status_code=404, detail="Session not found")
+    
+    del chat_histories[session_id]
+    return {"message": "Session ended successfully"}

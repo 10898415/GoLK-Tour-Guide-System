@@ -1,6 +1,9 @@
-DEFAULT_PROMPTS = {
-    "welcome": "Hello! I'm Tour Mate, your AI travel assistant for Sri Lanka. How can I assist you today?",
-    "places_query": "I can suggest beautiful places in Sri Lanka. Just ask!",
-    "help": "You can ask me about destinations, accommodations, restaurants, or any travel tips in Sri Lanka.",
-    "farewell": "Happy travels! If you need more info, just ask anytime!"
-}
+db_structure = """
+    The below is the cypher query to create the database structure for the prompts
+    
+        // Create unique constraints
+        CREATE CONSTRAINT District_District_uniq IF NOT EXISTS 
+        FOR (n:District) REQUIRE (n.District) IS UNIQUE;
+        CREATE CONSTRAINT Areas_Area_uniq IF NOT EXISTS 
+        FOR (n:Area) REQUIRE (n.Areas) IS UNIQUE;
+"""
