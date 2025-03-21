@@ -1,0 +1,9 @@
+uvicorn
+fastapi
+neo4j
+pandas
+numpy
+scikit-learn
+python-dotenv
+pydantic
+openai
