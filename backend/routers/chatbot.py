@@ -86,7 +86,12 @@ CURRENT_DIR = Path(__file__).resolve().parent
 STATIC_DIR = CURRENT_DIR.parent / "static" / "temp"
 os.makedirs(STATIC_DIR, exist_ok=True)
 
-
+# Load JSON data
+with open('routers/sample.json', 'r') as file:
+    data = json.load(file)
+    # Extract questions and their corresponding cypher queries
+    db_questions = [item['question'] for item in data['data']]
+    cypher_queries = [item['cypher_query'] for item in data['data']]
 
 
 vectorizer = TfidfVectorizer()
@@ -178,7 +183,22 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
         "query": "OPTIONAL MATCH query here"
     }
 
+    # Find the top 5 similar questions
+    settings_prompt = f"""
+       Response Settings:
+       - Language: {question.settings.language}
+       - Politeness Level: {question.settings.politeness_level}
+       - Formality: {question.settings.formality}
+       - Response Length: {question.settings.response_length}
+       - Current date: {question.date}
+       - Current time: {question.time}
 
+       Please adjust your response according to these settings:
+       1. Use the specified {question.settings.language} language
+       2. Maintain {question.settings.politeness_level} politeness level
+       3. Keep {question.settings.formality} tone
+       5. Provide {question.settings.response_length} response length
+       """
 
     # Move the prompt template outside the function
     QUERY_CHAT_PROMPT = """Role and Context:
