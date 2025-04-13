@@ -34,4 +34,36 @@ db_structure = """
            d.Sri_Lankan_Moors = row.Sri_Lankan_Moors, 
            d.Others = row.Others, 
            d.Most_Used_Language = row.Most_Used_Language;
+
+        // Load Area nodes
+        LOAD CSV WITH HEADERS FROM 'file:///areas.csv' AS row 
+        MERGE (a:Area {Areas: row.Areas})
+        ON CREATE SET 
+           a.Areas = row.Areas,
+           a.Description = row.Description, 
+           a.Population = toInteger(trim(row.Population));
+        
+        // Load Place nodes
+        LOAD CSV WITH HEADERS FROM 'file:///places.csv' AS row 
+        MERGE (p:Place {Place_To_Visit: row.Place_To_Visit})
+        ON CREATE SET 
+           p.Place_To_Visit = row.Place_To_Visit,
+           p.Activity_Type = row.Activity_Type, 
+           p.Description = row.Description;
+
+        // Load Restaurant nodes
+        LOAD CSV WITH HEADERS FROM 'file:///restaurants.csv' AS row 
+        MERGE (r:Restaurant {Restaurant: row.Restaurant})
+        ON CREATE SET 
+           r.Restaurant = row.Restaurant,
+           r.Ratings = row.Ratings, 
+           r.Google_map_link = row.Google_map_link;
+        
+        // Load Weather nodes
+        LOAD CSV WITH HEADERS FROM 'file:///weather.csv' AS row 
+        MERGE (w:Weather {Description: row.Description})
+        ON CREATE SET 
+           w.Description = row.Description,
+           w.Month = row.Month, 
+           w.Season = row.Season;
 """
