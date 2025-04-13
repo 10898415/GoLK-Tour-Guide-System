@@ -66,4 +66,103 @@ db_structure = """
            w.Description = row.Description,
            w.Month = row.Month, 
            w.Season = row.Season;
+
+         // Load Accommodation nodes
+        LOAD CSV WITH HEADERS FROM 'file:///accomadation.csv' AS row 
+        MERGE (a:Accomadation {Accommodation_Place_Name: row.Accommodation_Place_Name})
+        ON CREATE SET 
+           a.Accommodation_Place_Name = row.Accommodation_Place_Name,
+           a.Rating = row.Rating, 
+           a.Type = row.Type, 
+           a.Description = row.Description, 
+           a.Nearby_Places = row.Nearby_Places, 
+           a.Booking_Com_Booking_Link = row.Booking_Com_Booking_Link;
+        
+        // Load Province nodes
+        LOAD CSV WITH HEADERS FROM 'file:///DistrictEthnicity.csv' AS row 
+        MERGE (p:Province {Province: row.Province})
+        ON CREATE SET
+           p.Province = row.Province;
+        
+        // Add Police Station nodes
+        LOAD CSV WITH HEADERS FROM 'file:///PoliceStations.csv' AS row 
+        MERGE (p:PoliceStation {Nearest_Police_Station: row.Nearest_Police_Station})
+        ON CREATE SET 
+           p.Nearest_Police_Station = row.Nearest_Police_Station,
+           p.Contact_Number = toInteger(trim(row.Contact_Number)),
+           p.Google_Map_Link = row.Google_Map_Link;
+        
+        // Add Hospital nodes
+        LOAD CSV WITH HEADERS FROM 'file:///Hospitals.csv' AS row 
+        MERGE (h:Hospital {Nearest_Hospital: row.Nearest_Hospital})
+        ON CREATE SET 
+           h.Nearest_Hospital = row.Nearest_Hospital,
+           h.Contact_Number = toInteger(trim(row.Contact_Number)),
+           h.Google_Map_Link = row.Google_Map_Link;
+        
+        // Add Country nodes
+        LOAD CSV WITH HEADERS FROM 'file:///SriLanka.csv' AS row 
+        MERGE (c:Country {Country: row.Country})
+        ON CREATE SET 
+           c.Country = row.Country,
+           c.Suwa_Seriya_Ambulance = toInteger(trim(row.Suwa_Seriya_Ambulance)),
+           c.Police_Emergency_Service = toInteger(trim(row.Police_Emergency_Service)),
+           c.Description = row.Description,
+           c.Nationality = row.Nationality,
+           c.Currency = row.Currency;
+        
+        // Create relationships
+        LOAD CSV WITH HEADERS FROM 'file:///areas.csv' AS row 
+        MATCH (a:Area {Areas: row.Areas}) 
+        MATCH (d:District {District: row.District}) 
+        MERGE (a)-[:LOCATED_IN]->(d);
+        
+        LOAD CSV WITH HEADERS FROM 'file:///places.csv' AS row 
+        MATCH (a:Area {Areas: row.Area}) 
+        MATCH (p:Place {Place_To_Visit: row.Place_To_Visit}) 
+        MERGE (a)-[:CONSISTED_WITH]->(p);
+        
+        LOAD CSV WITH HEADERS FROM 'file:///restaurants.csv' AS row 
+        MATCH (a:Area {Areas: row.Area}) 
+        MATCH (r:Restaurant {Restaurant: row.Restaurant}) 
+        MERGE (a)-[:HAS_RESTAURANT]->(r);
+        
+        LOAD CSV WITH HEADERS FROM 'file:///weather.csv' AS row 
+        MATCH (a:Area {Areas: row.Area}) 
+        MATCH (w:Weather {Description: row.Description}) 
+        MERGE (a)-[:HAS_WEATHER]->(w);
+        
+        LOAD CSV WITH HEADERS FROM 'file:///accomadation.csv' AS row 
+        MATCH (a:Area {Areas: row.Area}) 
+        MATCH (acc:Accomadation {Accommodation_Place_Name: row.Accommodation_Place_Name}) 
+        MERGE (a)-[:HAS_ACCOMADATION]->(acc);
+        
+        LOAD CSV WITH HEADERS FROM 'file:///DistrictEthnicity.csv' AS row 
+        MATCH (p:Province {Province: row.Province}) 
+        MATCH (d:District {District: row.District}) 
+        MERGE (p)-[:HAS_DISTRICT]->(d);
+        
+        // Distance between Areas
+        LOAD CSV WITH HEADERS FROM 'file:///City_Distances.csv' AS row 
+        MATCH (a1:Area {Areas: row.Location_1}) 
+        MATCH (a2:Area {Areas: row.Location_2}) 
+        MERGE (a1)-[:HAS_DISTANCE {Distance_in_km: toFloat(trim(row.Distance_in_km))}]->(a2);
+        
+        // Areas to Police Stations
+        LOAD CSV WITH HEADERS FROM 'file:///PoliceStations.csv' AS row 
+        MATCH (a:Area {Areas: row.Areas}) 
+        MATCH (p:PoliceStation {Nearest_Police_Station: row.Nearest_Police_Station}) 
+        MERGE (a)-[:HAS_POLICE]->(p);
+        
+        // Areas to Hospitals
+        LOAD CSV WITH HEADERS FROM 'file:///Hospitals.csv' AS row 
+        MATCH (a:Area {Areas: row.Areas}) 
+        MATCH (h:Hospital {Nearest_Hospital: row.Nearest_Hospital}) 
+        MERGE (a)-[:HAS_HOSPITAL]->(h);
+        
+        // Country to Province relationship
+        LOAD CSV WITH HEADERS FROM 'file:///DistrictEthnicity.csv' AS row 
+        MATCH (c:Country {Country: row.Country}) 
+        MATCH (p:Province {Province: row.Province}) 
+        MERGE (c)-[:HAS_PROVINCE]->(p);
 """
