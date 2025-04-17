@@ -165,4 +165,137 @@ db_structure = """
         MATCH (c:Country {Country: row.Country}) 
         MATCH (p:Province {Province: row.Province}) 
         MERGE (c)-[:HAS_PROVINCE]->(p);
+
+
+        Note: When generating the cypher queries please make sure to do not return the nodes and relationships. please return the properties of the nodes and relationships.
+        
+        Here are the nodes used:
+         
+        Accomadation, Area, Country, District, Hospital, Place, PoliceStation, Province, Restaurant, Weather
+        
+        Here are the relationships used:
+        
+        CONSISTED_WITH, HAS_ACCOMADATION, HAS_DISTANCE, HAS_DISTRICT, HAS_HOSPITAL, HAS_POLICE, HAS_PROVINCE, HAS_RESTAURANT, HAS_WEATHER, LOCATED_IN
+        
+        Here are the node properties used:
+        
+            District Node:
+                District (unique constraint)
+                Sinhalese
+                Sri_Lankan_Tamils
+                Indian_Tamils
+                Sri_Lankan_Moors
+                Others
+                Most_Used_Language
+                
+                
+            Area Node:
+                Areas (unique constraint)
+                Description
+                Population (Integer type)
+                
+                
+            Place Node:
+                Place_To_Visit (unique constraint)
+                Activity_Type
+                Description
+                
+                
+            Restaurant Node (When user ask about restaurants use this):
+                Restaurant (unique constraint)
+                Ratings
+                Google_map_link
+                
+                
+            Weather Node:
+                Description (unique constraint)
+                Month
+                Season
+                
+                
+            Accommodation Node (When user ask about hotels/motels use this):
+                Accommodation_Place_Name (unique constraint)
+                Rating
+                Type
+                Description
+                Nearby_Places
+                Booking_Com_Booking_Link
+                
+                
+            Province Node:
+                Province (unique constraint)
+                
+                
+            Police Station Node:
+                Nearest_Police_Station (unique constraint)
+                Contact_Number (Integer type)
+                Google_Map_Link
+                
+                
+            Hospital Node:
+                Nearest_Hospital (unique constraint)
+                Contact_Number (Integer type)
+                Google_Map_Link
+                
+                
+            Country Node:
+                Country (unique constraint)
+                Suwa_Seriya_Ambulance (Integer type)
+                Police_Emergency_Service (Integer type)
+                Description
+                Nationality
+                Currency
+                
+        Here are the relationship properties used:
+        
+            Area -> District
+            Relationship type: LOCATED_IN
+            Properties: None
+            
+            
+            Area -> Place
+            Relationship type: CONSISTED_WITH
+            Properties: None
+            
+            
+            Area -> Restaurant
+            Relationship type: HAS_RESTAURANT
+            Properties: None
+            
+            
+            Area -> Weather
+            Relationship type: HAS_WEATHER
+            Properties: None
+            
+            
+            Area -> Accommodation
+            Relationship type: HAS_ACCOMADATION
+            Properties: None
+            
+            
+            Province -> District
+            Relationship type: HAS_DISTRICT
+            Properties: None
+            
+            
+            Area -> Area (Distance relationship)
+            Relationship type: HAS_DISTANCE
+            Properties: Distance_in_km (Float type)
+            
+            
+            Area -> Police Station
+            Relationship type: HAS_POLICE
+            Properties: None
+            
+            
+            Area -> Hospital
+            Relationship type: HAS_HOSPITAL
+            Properties: None
+            
+            
+            Country -> Province
+            Relationship type: HAS_PROVINCE
+            Properties: None
+            
+        Use only the relationship properties that are not None.
 """
