@@ -1,0 +1,25 @@
+{
+    "data": [
+      {
+        "question": "What are the top-rated accommodations in Arugam Bay?",
+        "cypher_query": "OPTIONAL MATCH (a:Area {Areas: \"Arugam Bay\"})-[:HAS_ACCOMADATION]->(acc:Accomadation)\nWHERE acc.Rating IS NOT NULL\nRETURN acc.Accommodation_Place_Name AS Accommodation, acc.Rating AS Rating\nORDER BY acc.Rating DESC\nLIMIT 5;"
+      },
+      {
+        "question": "Which areas are located in the Central Province?",
+        "cypher_query": "OPTIONAL MATCH (p:Province {Province: \"Central\"})-[:HAS_DISTRICT]->(d:District)<-[:LOCATED_IN]-(a:Area)\nRETURN a.Areas AS Area, d.District AS District;"
+      },
+      {
+        "question": "What are the accommodations in Mirissa with a rating above 8?",
+        "cypher_query": "OPTIONAL MATCH (a:Area {Areas: \"Mirissa\"})-[:HAS_ACCOMADATION]->(acc:Accomadation)\nWHERE toFloat(acc.Rating) > 8\nRETURN acc.Accommodation_Place_Name AS Accommodation, acc.Rating AS Rating;"
+      },{
+        "question": "What are the top 5 highest-rated accommodations in Nuwara Eliya?",
+        "cypher_query": "OPTIONAL MATCH (a:Area {Areas: \"Nuwara Eliya\"})-[:HAS_ACCOMADATION]->(acc:Accomadation)\nWHERE acc.Rating IS NOT NULL\nRETURN acc.Accommodation_Place_Name AS Accommodation, acc.Rating AS Rating\nORDER BY acc.Rating DESC\nLIMIT 5;"
+      },{
+        "question": "What are the accommodations near Gregory Lake in Nuwara Eliya?",
+        "cypher_query": "OPTIONAL MATCH (a:Area {Areas: \"Nuwara Eliya\"})-[:HAS_ACCOMADATION]->(acc:Accomadation)\nWHERE acc.Nearby_Places CONTAINS \"Gregory Lake\"\nRETURN acc.Accommodation_Place_Name AS Accommodation, acc.Nearby_Places AS Nearby_Places;"
+      },{
+        "question": "What are the districts in the Southern Province?",
+        "cypher_query": "OPTIONAL MATCH (p:Province {Province: \"Southern\"})-[:HAS_DISTRICT]->(d:District)\nRETURN d.District AS District;"
+      }
+    ]
+  }
