@@ -20,6 +20,54 @@
       },{
         "question": "What are the districts in the Southern Province?",
         "cypher_query": "OPTIONAL MATCH (p:Province {Province: \"Southern\"})-[:HAS_DISTRICT]->(d:District)\nRETURN d.District AS District;"
+      },{
+        "question": "What are the accommodations in Hikkaduwa with a rating of 8 or higher?",
+        "cypher_query": "OPTIONAL MATCH (a:Area {Areas: \"Hikkaduwa\"})-[:HAS_ACCOMADATION]->(acc:Accomadation)\nWHERE toFloat(acc.Rating) >= 8\nRETURN acc.Accommodation_Place_Name AS Accommodation, acc.Rating AS Rating;"
+      },{
+        "question": "What is the population of Colombo?",
+        "cypher_query": "OPTIONAL MATCH (a:Area {Areas: \"Colombo\"})\nRETURN a.Population AS Population;"
+      },{
+        "question": "What are the popular places to visit in Galle?",
+        "cypher_query": "OPTIONAL MATCH (a:Area {Areas: \"Galle\"})-[:CONSISTED_WITH]->(p:Place)\nRETURN p.Place_To_Visit AS Place, p.Description AS Description;"
+      },{
+        "question": "What are the accommodations in Ella with a rating above 9?",
+        "cypher_query": "OPTIONAL MATCH (a:Area {Areas: \"Ella\"})-[:HAS_ACCOMADATION]->(acc:Accomadation)\nWHERE toFloat(acc.Rating) > 9\nRETURN acc.Accommodation_Place_Name AS Accommodation, acc.Rating AS Rating;"
+      },{
+        "question": "What are the accommodations in Trincomalee with a rating above 8?",
+        "cypher_query": "OPTIONAL MATCH (a:Area {Areas: \"Trincomalee\"})-[:HAS_ACCOMADATION]->(acc:Accomadation)\nWHERE toFloat(acc.Rating) > 8\nRETURN acc.Accommodation_Place_Name AS Accommodation, acc.Rating AS Rating;"
+      },{
+        "question": "What are the top 5 highest-rated accommodations in Sri Lanka?",
+        "cypher_query": "OPTIONAL MATCH (a:Area)-[:HAS_ACCOMADATION]->(acc:Accomadation)\nWHERE acc.Rating IS NOT NULL AND acc.Rating <> \"Not available\" AND acc.Rating <> \"No reviews yet\"\nRETURN acc.Accommodation_Place_Name AS Accommodation, acc.Rating AS Rating\nORDER BY acc.Rating DESC\nLIMIT 5;"
+      },{
+        "question": "What are the accommodations near Kandy ?",
+        "cypher_query": "OPTIONAL MATCH (a:Area {Areas: \"Kandy\"})-[:HAS_ACCOMADATION]->(acc:Accomadation)\nRETURN acc.Accommodation_Place_Name AS Accommodation, acc.Nearby_Places AS Nearby_Places;"
+      },{
+        "question": "Retrieve all areas in a specific district along with their descriptions.",
+        "cypher_query": "OPTIONAL MATCH (d:District)<-[:LOCATED_IN]-(a:Area)\nRETURN d.District AS District, collect({Area: a.Areas, Description: a.Description}) AS AreasDetails;"
+      },{
+        "question": "Find the nearest police station for each area in a specific district.",
+        "cypher_query": "OPTIONAL MATCH (d:District)<-[:LOCATED_IN]-(a:Area)-[:HAS_POLICE]->(p:PoliceStation)\nRETURN d.District AS District, a.Areas AS Area, p.Nearest_Police_Station AS NearestPoliceStation;"
+      },{
+        "question": "Retrieve accommodations in a specific area along with their ratings and types.",
+        "cypher_query": "OPTIONAL MATCH (a:Area)-[:HAS_ACCOMADATION]->(acc:Accomadation)\nRETURN a.Areas AS Area, collect({Accommodation: acc.Accommodation_Place_Name, Rating: acc.Rating, Type: acc.Type}) AS Accommodations;"
+      },{
+        "question": "Get all places to visit in areas with a population greater than 10,000.",
+        "cypher_query": "OPTIONAL MATCH (a:Area)-[:CONSISTED_WITH]->(p:Place)\nWHERE a.Population > 10000\nRETURN a.Areas AS Area, collect(p.Place_To_Visit) AS PlacesToVisit;"
+      },{
+        "question": "Find restaurants in areas with Sunny weather at any time in the year.",
+        "cypher_query": "OPTIONAL MATCH (a:Area)-[:HAS_RESTAURANT]->(r:Restaurant)\nOPTIONAL MATCH (a)-[:HAS_WEATHER]->(w:Weather)\nWHERE w.Description = \"Sunny\"\nRETURN a.Areas AS Area, collect(r.Restaurant) AS Restaurants;"
+      },{
+        "question": "Retrieve all provinces and their associated weather conditions.",
+        "cypher_query": "OPTIONAL MATCH (p:Province)-[:HAS_DISTRICT]->(d:District)<-[:LOCATED_IN]-(a:Area)-[:HAS_WEATHER]->(w:Weather)\nRETURN p.Province AS Province, collect(distinct w.Description) AS WeatherConditions;"
+      },{
+        "question": "Get all districts and their ethnic compositions.",
+        "cypher_query": "OPTIONAL MATCH (d:District)\nRETURN d.District AS District, {Sinhalese: d.Sinhalese, Tamils: d.Sri_Lankan_Tamils, Moors: d.Sri_Lankan_Moors, Others: d.Others} AS EthnicComposition;"
+      },{
+        "question": "Find all distances between areas in a specific district.",
+        "cypher_query": "OPTIONAL MATCH (a1:Area)-[d:HAS_DISTANCE]->(a2:Area)\nWHERE a1.Areas STARTS WITH \"Colombo\"\nRETURN a1.Areas AS FromArea, a2.Areas AS ToArea, d.Distance_in_km AS Distance;"
+      },{
+        "question": "Retrieve all places to visit along with their activities and nearby accommodations.",
+        "cypher_query": "OPTIONAL MATCH (p:Place)<-[:CONSISTED_WITH]-(a:Area)-[:HAS_ACCOMADATION]->(acc:Accomadation)\nRETURN p.Place_To_Visit AS Place, p.Activity_Type AS Activity, collect(acc.Accommodation_Place_Name) AS NearbyAccommodations;"
       }
     ]
   }
