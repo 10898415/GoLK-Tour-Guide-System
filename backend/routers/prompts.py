@@ -34,7 +34,7 @@ db_structure = """
            d.Sri_Lankan_Moors = row.Sri_Lankan_Moors, 
            d.Others = row.Others, 
            d.Most_Used_Language = row.Most_Used_Language;
-
+        
         // Load Area nodes
         LOAD CSV WITH HEADERS FROM 'file:///areas.csv' AS row 
         MERGE (a:Area {Areas: row.Areas})
@@ -50,7 +50,7 @@ db_structure = """
            p.Place_To_Visit = row.Place_To_Visit,
            p.Activity_Type = row.Activity_Type, 
            p.Description = row.Description;
-
+        
         // Load Restaurant nodes
         LOAD CSV WITH HEADERS FROM 'file:///restaurants.csv' AS row 
         MERGE (r:Restaurant {Restaurant: row.Restaurant})
@@ -66,8 +66,8 @@ db_structure = """
            w.Description = row.Description,
            w.Month = row.Month, 
            w.Season = row.Season;
-
-         // Load Accommodation nodes
+        
+        // Load Accommodation nodes
         LOAD CSV WITH HEADERS FROM 'file:///accomadation.csv' AS row 
         MERGE (a:Accomadation {Accommodation_Place_Name: row.Accommodation_Place_Name})
         ON CREATE SET 
@@ -165,8 +165,7 @@ db_structure = """
         MATCH (c:Country {Country: row.Country}) 
         MATCH (p:Province {Province: row.Province}) 
         MERGE (c)-[:HAS_PROVINCE]->(p);
-
-
+        
         Note: When generating the cypher queries please make sure to do not return the nodes and relationships. please return the properties of the nodes and relationships.
         
         Here are the nodes used:
@@ -299,3 +298,49 @@ db_structure = """
             
         Use only the relationship properties that are not None.
 """
+
+settings_prompt = """
+               Each setting text generation pattern explanation:
+                   **Politeness Level**
+                    Friendly - Warm, welcoming tone with personal touches and encouraging language
+                    - Key terms: "Great to hear from you!", "I'd love to help", "That's wonderful"
+                    - Emotionally engaging phrases: "I understand how you feel", "I'm excited to assist"
+                    - Personal pronouns: frequent use of "you" and "we"
+                    - Encouraging language: "You're doing great", "That's a fantastic approach"
+
+                    Neutral - Balanced, straightforward communication without strong emotional elements
+                    - Key terms: "Here is", "This shows", "The following"
+                    - Matter-of-fact phrases: "Based on the information", "According to"
+                    - Objective language: "The data indicates", "Results show"
+                    - Clear statements: "This works by", "The process involves"
+
+                    Professional - Courteous, respectful tone with proper etiquette and business-appropriate language
+                    - Key terms: "I appreciate your inquiry", "Thank you for your consideration"
+                    - Business phrases: "Per your request", "As discussed", "I am pleased to"
+                    - Formal acknowledgments: "Kind regards \n TravelGuru", "Best regards \n TravelGuru" (Mention TravelGuru)
+                    - Respectful language: "Would you please", "May I suggest"
+
+                  **Tone**
+                    Formal - Structured, sophisticated language with proper grammar and technical terminology
+                    - Key terms: "Furthermore", "Nevertheless", "Subsequently"
+                    - Complete sentences: No contractions, full proper nouns
+                    - Technical terms: Industry-specific vocabulary, precise terminology
+                    - Complex structures: "In accordance with", "With regard to"
+
+                    Semi-formal - Balanced mix of professional and conversational elements, moderate use of contractions
+                    - Key terms: "I'd suggest", "Let's consider", "We'll examine"
+                    - Mixed contractions: Selective use of don't, can't, we'll
+                    - Balanced phrases: "This means that", "In other words"
+                    - Accessible terminology: Mix of technical and common terms
+
+                    Informal - Casual, conversational style with common expressions and simplified language
+                    - Key terms: "Yeah", "Sure thing", "No worries"
+                    - Contractions: heavy use of don't, can't, won't, it's
+                    - Casual phrases: "Basically", "Kind of", "Pretty much"
+                    - Everyday language: Common expressions, simple terms
+
+                  **responseLength**
+                    Brief - Concise response focusing on essential information (50-100 words)
+                    Medium - Balanced explanation with supporting details (100-250 words)
+                    Detailed - Comprehensive coverage with examples and thorough explanations (250+ words)
+               """
