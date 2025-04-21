@@ -62,7 +62,7 @@ uri = os.getenv("NEO4J_URI")
 username = os.getenv("NEO4J_USERNAME")
 password = os.getenv("NEO4J_PASSWORD")
 openai_api_key = os.getenv("OPENAI_API_KEY")
-deployment = os.getenv("DEPLOYMENT_NAME", "gpt-3.5-turbo")
+deployment = os.getenv("DEPLOYMENT_NAME", "gpt-4o")
 db_structure_prompt = db_structure
 settings_prompt = settings_prompt
 client = OpenAI(api_key=openai_api_key)
@@ -164,17 +164,22 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
         answers = chat_histories[session_id]["answers"]  # Get the answers from the chat histories
         # Get the last 3 items, excluding the current question
         for i in range(max(len(questions) - 4, 0), len(questions) - 1):
+            print(answers[i])
             recent_history.append({
                 "question": questions[i],
-                "answer": answers[i]
+                "answer":  answers[i]
             })
+
+    print(recent_history)
 
     # Format the conversation history
     history_text = "No previous conversation." if not recent_history else "\n".join([
-        f"Previous Question: {item['question']}\n"
-        f"Previous Answer: {item['answer']}\n"
-        for item in recent_history
+        f"Previous Question {item + 1}: {recent_history[item]['question']}\n"
+        f"Previous Answer {item + 1}: {recent_history[item]['answer']}\n"
+        for item in range(0, len(recent_history))
     ])
+
+    print("Recent History :\n\n", history_text)
 
     # Define template as a constant
     TEMPLATE_CYPHER = {
@@ -203,10 +208,6 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
     # Move the prompt template outside the function
     QUERY_CHAT_PROMPT = """Role and Context:
                         You are TourMate, an AI assistant that helps users with travel-related queries about Sri Lanka.
-                        
-                        Recent Conversation History: (This contains the recent questions user asked)
-                        -------------------------
-                        {history_text}
                         
                          Database Context:
                         ---------------
@@ -292,6 +293,20 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         
                         # Strictly follow this setting prompts as well
                         {settings_prompt}  
+                        
+                         Recent Conversation History: (This contains the recent questions user asked)
+                        -------------------------
+                         chat history: {history_text}
+                         
+                         user question: {question}
+                         
+                        Please consider if the users question is relevant to the chat history, if it is relevant, 
+                        please provide the answer based on the chat history.If it is not relevant, please ignore the chat history.
+                        Example: If user has asked a particular location and ask a question without mentioning a new location please provide the answer based on the previous questions location
+                        
+                        *** Very very important: Please consider the chat history as well ***
+                        
+                        When looking at the history, please consider the highest question number as the last question, for example question 3 should have priority more than question 2.
                         """
 
     retry_count = 0  # Initialize retry count
@@ -318,10 +333,15 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
         settings_prompt=settings_prompt
     )
 
+    print("Formatted Prompt :\n\n", formatted_prompt)
+
+
+
 
     # Retry loop for API call
     while retry_count < max_retries:
         try:
+            print("Tried")
             # Construct chat messages
             chat_messages = [
                 {
