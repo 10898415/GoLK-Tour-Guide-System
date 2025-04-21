@@ -1,8 +1,11 @@
+// app/page.js
 "use client";
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import FeaturedDestinations from './components/FeaturedDestinations';
+
 
 export default function HomePage() {
   const [searchDestination, setSearchDestination] = useState('');
@@ -41,7 +44,7 @@ export default function HomePage() {
                 </svg>
                 <input 
                   type="text" 
-                  placeholder="Where in Sri Lanka do you want to go?" 
+                  placeholder="Ask TourMate about a destination..." 
                   className="flex-1 p-2 outline-none"
                   value={searchDestination}
                   onChange={(e) => setSearchDestination(e.target.value)}
@@ -63,96 +66,8 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Featured Destinations */}
-      <div className="container mx-auto px-6 py-16">
-        <h2 className="text-3xl font-bold text-gray-800 mb-10 text-center">Featured Destinations</h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Destination 1 */}
-          <div className="rounded-xl overflow-hidden shadow-lg group hover:shadow-2xl transition-all">
-            <div className="relative h-64 w-full">
-              <Image 
-                src="/images/sigiriya.jpg" 
-                alt="Sigiriya Rock Fortress" 
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-3">
-                <h3 className="text-xl font-bold text-gray-800">Sigiriya</h3>
-                <div className="flex items-center">
-                  <span className="text-amber-500">★★★★★</span>
-                  <span className="text-gray-600 ml-1">4.8</span>
-                </div>
-              </div>
-              <p className="text-gray-600 mb-4">Ancient rock fortress with stunning views and remarkable history</p>
-              <button 
-                onClick={handleChatbotRedirect}
-                className="text-emerald-600 font-medium hover:text-emerald-800"
-              >
-                Ask TourMate about Sigiriya →
-              </button>
-            </div>
-          </div>
-
-          {/* Destination 2 */}
-          <div className="rounded-xl overflow-hidden shadow-lg group hover:shadow-2xl transition-all">
-            <div className="relative h-64 w-full">
-              <Image 
-                src="/images/kandylake.jpg" 
-                alt="Kandy Lake" 
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-3">
-                <h3 className="text-xl font-bold text-gray-800">Kandy</h3>
-                <div className="flex items-center">
-                  <span className="text-amber-500">★★★★☆</span>
-                  <span className="text-gray-600 ml-1">4.7</span>
-                </div>
-              </div>
-              <p className="text-gray-600 mb-4">Cultural capital with the famous Temple of the Sacred Tooth Relic</p>
-              <button 
-                onClick={handleChatbotRedirect}
-                className="text-emerald-600 font-medium hover:text-emerald-800"
-              >
-                Ask TourMate about Kandy →
-              </button>
-            </div>
-          </div>
-
-          {/* Destination 3 */}
-          <div className="rounded-xl overflow-hidden shadow-lg group hover:shadow-2xl transition-all">
-            <div className="relative h-64 w-full">
-              <Image 
-                src="/images/galle.jpg" 
-                alt="Galle Fort" 
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-3">
-                <h3 className="text-xl font-bold text-gray-800">Galle</h3>
-                <div className="flex items-center">
-                  <span className="text-amber-500">★★★★★</span>
-                  <span className="text-gray-600 ml-1">4.9</span>
-                </div>
-              </div>
-              <p className="text-gray-600 mb-4">Colonial-era fortress city with charming streets and ocean views</p>
-              <button 
-                onClick={handleChatbotRedirect}
-                className="text-emerald-600 font-medium hover:text-emerald-800"
-              >
-                Ask TourMate about Galle →
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Featured Destinations - Now using dynamic component */}
+      <FeaturedDestinations count={3} />
 
       {/* Why Use TourMate Section */}
       <div className="bg-gray-50 py-16">

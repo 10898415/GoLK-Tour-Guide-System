@@ -5,7 +5,7 @@ const BACKEND_URL = process.env.BACKEND_URL || 'http://127.0.0.1:8000';
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { message, session_id } = body;
+    const { message, session_id, language } = body;
 
     if (!message) {
       return NextResponse.json(
@@ -34,7 +34,7 @@ export async function POST(req) {
         question: message,
         session_id: session_id,
         settings: {
-          language: "English",
+          language: language || "English",  // Use the mapped language parameter
           politeness_level: "Friendly",
           formality: "Casual",
           creativity: 0.7,

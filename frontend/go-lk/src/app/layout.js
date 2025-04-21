@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <title>GOLK Tourist Guide - Your AI-Powered Sri Lankan Travel Assistant</title>
+        <title>Go-LK Tourist Guide</title>
         <meta name="description" content="GOLK Tourist Guide provides AI-powered assistance for travelers in Sri Lanka, offering accurate information about accommodations, attractions, and emergency services." />
       </head>
       <body className="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
@@ -51,7 +51,7 @@ export default function RootLayout({ children }) {
                     className="object-contain"
                   />
                 </div>
-                <span className="text-xl font-bold text-gray-800">GOLK Tourist Guide</span>
+                <span className="text-xl font-bold text-gray-800">Go-LK </span>
               </Link>
               
               {/* Desktop Navigation */}
@@ -84,18 +84,9 @@ export default function RootLayout({ children }) {
                       : 'text-gray-600 hover:text-emerald-600'
                   }`}
                 >
-                  About Sri Lanka
-                </Link>
-                <Link 
-                  href="/about-us" 
-                  className={`font-medium transition-colors ${
-                    pathname === '/about-us' 
-                      ? 'text-emerald-600 border-b-2 border-emerald-600' 
-                      : 'text-gray-600 hover:text-emerald-600'
-                  }`}
-                >
                   About Us
                 </Link>
+                
                 <Link 
                   href="/contact" 
                   className={`font-medium transition-colors ${
@@ -165,18 +156,9 @@ export default function RootLayout({ children }) {
                       : 'text-gray-600 hover:bg-gray-50'
                   }`}
                 >
-                  About Sri Lanka
-                </Link>
-                <Link 
-                  href="/about-us" 
-                  className={`block py-3 px-4 rounded-lg ${
-                    pathname === '/about-us' 
-                      ? 'bg-emerald-50 text-emerald-600 font-medium' 
-                      : 'text-gray-600 hover:bg-gray-50'
-                  }`}
-                >
                   About Us
                 </Link>
+                
                 <Link 
                   href="/contact" 
                   className={`block py-3 px-4 rounded-lg ${
@@ -240,14 +222,10 @@ export default function RootLayout({ children }) {
                   </li>
                   <li>
                     <Link href="/about" className="text-gray-400 hover:text-white transition-colors">
-                      About Sri Lanka
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/about-us" className="text-gray-400 hover:text-white transition-colors">
                       About Us
                     </Link>
                   </li>
+
                   <li>
                     <Link href="/contact" className="text-gray-400 hover:text-white transition-colors">
                       Contact
@@ -306,7 +284,7 @@ export default function RootLayout({ children }) {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                     <span className="text-gray-400">
-                      Plymouth University, UK
+                      NSBM Green University, Sri Lanka
                     </span>
                   </li>
                   

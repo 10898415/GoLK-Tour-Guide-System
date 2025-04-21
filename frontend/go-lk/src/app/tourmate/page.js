@@ -27,12 +27,34 @@ export default function TourMatePage() {
   const languages = [
     "English",
     "සිංහල", // Sinhala
-    "Français", // French
-    "Русский", // Russian
-    "日本語", // Japanese
-    "한국어", // Korean
-    "中文" // Chinese
+    "Français (French)", // French
+    "Русский (Russian)" , // Russian
+    "日本語 (Japanese)", // Japanese
+    "한국어 (Korean)", // Korean
+    "中文 (Chinese)", // Chinese
+    "Українська (Ukrainian)", // Ukrainian
+    "हिन्दी (Hindi)", // Hindi
+    "தமிழ் (Tamil)", // Tamil
+    "Nederlands (Dutch)" // Dutch
   ];
+  
+  // Function to map display language to backend language
+  const getBackendLanguage = (displayLanguage) => {
+    const languageMap = {
+      "English": "English",
+      "සිංහල": "Sinhala",
+      "Français (French)": "French",
+      "Русский (Russian)": "Russian",
+      "日本語 (Japanese)": "Japanese",
+      "한국어 (Korean)": "Korean",
+      "中文 (Chinese)": "Chinese",
+      "Українська (Ukrainian)": "Ukrainian",
+      "हिन्दी (Hindi)": "Hindi",
+      "தமிழ் (Tamil)": "Tamil",
+      "Nederlands (Dutch)": "Dutch"
+    };
+    return languageMap[displayLanguage] || "English";
+  };
   
   useEffect(() => {
     if (!loading && sessionId) {
@@ -48,9 +70,19 @@ export default function TourMatePage() {
     }
   }, [loading, sessionId, messages.length]);
 
-  // Scroll to bottom when messages change
+  // Only scroll if messages have been added (not on initial load)
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messages.length > 0) {
+      // Use a small timeout to ensure DOM has updated
+      const timer = setTimeout(() => {
+        messagesEndRef.current?.scrollIntoView({ 
+          behavior: "smooth",
+          block: "end"  // Ensures it aligns to the end of the container
+        });
+      }, 100);
+      
+      return () => clearTimeout(timer);
+    }
   }, [messages]);
 
   const handleSendMessage = async () => {
@@ -73,11 +105,15 @@ export default function TourMatePage() {
     setIsTyping(true);
 
     try {
+      // Map the display language to backend language
+      const backendLanguage = getBackendLanguage(language);
+      
       // Log the request for debugging
       console.log("Sending chat request:", {
         message: currentInput,
         session_id: sessionId,
-        language: language
+        language: language,
+        backendLanguage: backendLanguage
       });
 
       const response = await fetch("/api/chatbot", {
@@ -86,7 +122,7 @@ export default function TourMatePage() {
         body: JSON.stringify({
           message: currentInput,
           session_id: sessionId,
-          language: language
+          language: backendLanguage  // Send the mapped language to the backend
         }),
       });
 
@@ -237,13 +273,13 @@ export default function TourMatePage() {
           </div>
           
           {/* Chat Messages */}
-          <div className="h-[calc(70vh-120px)] overflow-y-auto p-4 bg-gray-50">
+          <div className="h-[calc(70vh-120px)] overflow-y-auto p-4 bg-gray-50" style={{ scrollBehavior: 'smooth' }}>
             {messages.map((message) => (
               <div key={message.id} className={`mb-4 flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {message.sender === 'bot' && (
                   <div className="w-8 h-8 relative rounded-full overflow-hidden flex-shrink-0 mr-2">
                     <Image 
-                      src="/images/tourmate-avatar.png" 
+                      src="/images/botAvatar.png" 
                       alt="TourMate Avatar" 
                       fill
                       className="object-cover"
@@ -277,7 +313,7 @@ export default function TourMatePage() {
                 {message.sender === 'user' && (
                   <div className="w-8 h-8 rounded-full bg-gray-300 overflow-hidden flex-shrink-0 ml-2 relative">
                     <Image 
-                      src="/images/user-avatar.png" 
+                      src="/images/userAvatar.png" 
                       alt="User" 
                       fill
                       className="object-cover"
