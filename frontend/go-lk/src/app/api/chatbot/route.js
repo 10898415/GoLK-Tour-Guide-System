@@ -24,7 +24,7 @@ export async function POST(req) {
     const currentDate = new Date();
     
     // Forward request to your backend
-    const backendResponse = await fetch(`${BACKEND_URL}/chatbot/chat`, {
+    const backendResponse = await fetch(`${BACKEND_URL}/api/chat`, {
       method: "POST",
       headers: { 
         "Content-Type": "application/json",

@@ -9,7 +9,7 @@ export default function HomePage() {
   const router = useRouter();
 
   const handleChatbotRedirect = () => {
-    router.push('/tourmate');
+    router.push('/tourmate?message=' + encodeURIComponent(searchDestination));
   };
 
   return (
@@ -17,7 +17,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <div className="relative h-[600px] w-full">
         <Image 
-          src="/images/sri-lanka-hero.jpg" 
+          src="/images/slbeach.jpg" 
           alt="Sri Lanka Beach" 
           fill
           priority
@@ -100,7 +100,7 @@ export default function HomePage() {
           <div className="rounded-xl overflow-hidden shadow-lg group hover:shadow-2xl transition-all">
             <div className="relative h-64 w-full">
               <Image 
-                src="/images/kandy.jpg" 
+                src="/images/kandylake.jpg" 
                 alt="Kandy Lake" 
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -215,7 +215,7 @@ export default function HomePage() {
             <div className="flex items-center mb-4">
               <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden relative">
                 <Image 
-                  src="/images/testimonial-1.jpg" 
+                  src="/images/userAvatar.png" 
                   alt="User" 
                   fill
                   className="object-cover"
@@ -236,7 +236,7 @@ export default function HomePage() {
             <div className="flex items-center mb-4">
               <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden relative">
                 <Image 
-                  src="/images/testimonial-2.jpg" 
+                  src="/images/userAvatar.png" 
                   alt="User" 
                   fill
                   className="object-cover"
@@ -257,7 +257,7 @@ export default function HomePage() {
             <div className="flex items-center mb-4">
               <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden relative">
                 <Image 
-                  src="/images/testimonial-3.jpg" 
+                  src="/images/userAvatar.png" 
                   alt="User" 
                   fill
                   className="object-cover"

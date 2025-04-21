@@ -5,10 +5,10 @@ export default function Navbar() {
       <div className="flex items-center space-x-2">
         <img
           src="/logo.png"
-          alt="GoLK Logo"
+          alt="GO-LK Logo"
           className="h-6 w-6 object-contain"
         />
-        <span className="font-bold text-lg">GOLK Tourist Guide</span>
+        <span className="font-bold text-lg">GO-LK</span>
       </div>
 
       {/* Right: Nav Links */}

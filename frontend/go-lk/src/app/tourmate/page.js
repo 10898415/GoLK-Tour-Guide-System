@@ -2,23 +2,37 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSession } from "../hooks/useSession";  // Go up one level to app, then to hooks
-import TableView from "../components/TableView";   // Go up one level to app, then to components
-
-// Rest of your component code...
+import { useSearchParams } from 'next/navigation'
+import { useSession } from "../hooks/useSession";
+import TableView from "../components/TableView";
 
 export default function TourMatePage() {
   const { sessionId, loading } = useSession();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [language, setLanguage] = useState("English"); // Default language
   const [suggestedQuestions, setSuggestedQuestions] = useState([
     "What are the top attractions in Kandy?",
     "Find hotels near Sigiriya",
     "What's the weather like in Galle in December?",
     "Emergency contacts in Colombo"
   ]);
+  const [hasAutoSent, setHasAutoSent] = useState(false);
+  const [queuedMessage, setQueuedMessage] = useState(null);
   const messagesEndRef = useRef(null);
+  const searchParams = useSearchParams()
+  
+  // Available languages
+  const languages = [
+    "English",
+    "සිංහල", // Sinhala
+    "Français", // French
+    "Русский", // Russian
+    "日本語", // Japanese
+    "한국어", // Korean
+    "中文" // Chinese
+  ];
   
   useEffect(() => {
     if (!loading && sessionId) {
@@ -40,6 +54,7 @@ export default function TourMatePage() {
   }, [messages]);
 
   const handleSendMessage = async () => {
+    console.log("Sending message:", input);
     if (!input.trim() || !sessionId) return;
 
     const userMessage = {
@@ -49,21 +64,41 @@ export default function TourMatePage() {
       time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
     };
 
-    setMessages((prev) => [...prev, userMessage]);
+    // Add user message to chat immediately
+    setMessages(prev => [...prev, userMessage]);
+    
+    // Save current input and clear the input field
+    const currentInput = input;
     setInput("");
     setIsTyping(true);
 
     try {
+      // Log the request for debugging
+      console.log("Sending chat request:", {
+        message: currentInput,
+        session_id: sessionId,
+        language: language
+      });
+
       const response = await fetch("/api/chatbot", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          message: input,
-          session_id: sessionId
+          message: currentInput,
+          session_id: sessionId,
+          language: language
         }),
       });
 
+      // Check if the response is ok
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Error response:", response.status, errorText);
+        throw new Error(`Request failed with status ${response.status}: ${errorText}`);
+      }
+
       const data = await response.json();
+      console.log("Received response:", data);
 
       // Simulate typing delay for more natural interaction
       setTimeout(() => {
@@ -72,23 +107,23 @@ export default function TourMatePage() {
         const botMessage = {
           id: `bot-${Date.now()}`,
           sender: "bot",
-          text: data.reply,
+          text: data.reply || "I'm sorry, I don't have a response for that.",
           time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
           tableData: data.tableData,
           tableInsights: data.tableInsights
         };
         
-        setMessages((prev) => [...prev, botMessage]);
+        setMessages(prev => [...prev, botMessage]);
         
         // Update suggested questions based on context
-        if (input.toLowerCase().includes("hotel") || input.toLowerCase().includes("stay")) {
+        if (currentInput.toLowerCase().includes("hotel") || currentInput.toLowerCase().includes("stay")) {
           setSuggestedQuestions([
             "What amenities are included?",
             "Is breakfast included?",
             "How far is it from attractions?",
             "What's the cancellation policy?"
           ]);
-        } else if (input.toLowerCase().includes("beach") || input.toLowerCase().includes("swimming")) {
+        } else if (currentInput.toLowerCase().includes("beach") || currentInput.toLowerCase().includes("swimming")) {
           setSuggestedQuestions([
             "Are there lifeguards?",
             "Best beaches for surfing?",
@@ -98,16 +133,37 @@ export default function TourMatePage() {
         }
       }, 1500);
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error sending message:", error);
       setIsTyping(false);
       
-      setMessages((prev) => [...prev, {
+      setMessages(prev => [...prev, {
         id: `error-${Date.now()}`,
         sender: "bot",
         text: "I'm sorry, I couldn't process your request. Please try again later.",
         time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       }]);
     }
+  };
+
+  // Auto enter first chat if the message search parameter exists
+  useEffect(() => {
+    const askMessage = searchParams.get('message');
+    if (askMessage && !hasAutoSent && !loading) {
+      setQueuedMessage(askMessage);
+      setInput(askMessage);
+      setHasAutoSent(true); // prevent re-running
+    }
+  }, [searchParams, hasAutoSent, loading]);
+
+  useEffect(() => {
+    if (queuedMessage && input === queuedMessage) {
+      handleSendMessage();
+      setQueuedMessage(null); // clear queued message
+    }
+  }, [input, queuedMessage]);
+
+  const handleLanguageChange = (e) => {
+    setLanguage(e.target.value);
   };
 
   const handleKeyPress = (e) => {
@@ -119,6 +175,10 @@ export default function TourMatePage() {
   
   const handleSuggestedQuestion = (question) => {
     setInput(question);
+    // Automatically send the suggested question
+    setTimeout(() => {
+      handleSendMessage();
+    }, 100);
   };
 
   if (loading) {
@@ -137,22 +197,42 @@ export default function TourMatePage() {
       <div className="container mx-auto px-4 py-8">
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
           {/* Chat Header */}
-          <div className="bg-emerald-700 p-4 flex items-center">
-            <div className="w-10 h-10 relative">
-              <Image 
-                src="/images/tourmate-avatar.png" 
-                alt="TourMate Avatar" 
-                fill
-                className="object-cover rounded-full"
-              />
+          <div className="bg-emerald-700 p-4 flex items-center justify-between">
+            <div className="flex items-center">
+              <div className="w-10 h-10 relative">
+                <Image 
+                  src="/images/botAvatar.png" 
+                  alt="TourMate Avatar" 
+                  fill
+                  className="object-cover rounded-full"
+                />
+              </div>
+              <div className="ml-3">
+                <div className="flex items-center">
+                  <h2 className="text-white font-bold">TourMate</h2>
+                  <div className="flex items-center ml-2">
+                    <div className="h-2 w-2 rounded-full bg-green-400 mr-1"></div>
+                    <span className="text-emerald-100 text-sm">Online</span>
+                  </div>
+                </div>
+                <p className="text-emerald-100 text-sm">Your Sri Lankan Travel Assistant</p>
+              </div>
             </div>
-            <div className="ml-3">
-              <h2 className="text-white font-bold">TourMate</h2>
-              <p className="text-emerald-100 text-sm">Your Sri Lankan Travel Assistant</p>
-            </div>
-            <div className="flex items-center ml-auto">
-              <div className="h-2 w-2 rounded-full bg-green-400 mr-1"></div>
-              <span className="text-emerald-100 text-sm">Online</span>
+            
+            {/* Language Selector - Positioned on the right */}
+            <div className="flex items-center">
+              <span className="text-white text-sm mr-2">Language:</span>
+              <select
+                value={language}
+                onChange={handleLanguageChange}
+                className="bg-emerald-600 text-white border border-emerald-500 rounded-md py-1 px-2 text-sm focus:outline-none focus:ring-1 focus:ring-white"
+              >
+                {languages.map((lang) => (
+                  <option key={lang} value={lang}>
+                    {lang}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
           
