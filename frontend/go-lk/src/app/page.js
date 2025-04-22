@@ -15,6 +15,12 @@ export default function HomePage() {
     router.push('/tourmate?message=' + encodeURIComponent(searchDestination));
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleChatbotRedirect();
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -48,6 +54,7 @@ export default function HomePage() {
                   className="flex-1 p-2 outline-none"
                   value={searchDestination}
                   onChange={(e) => setSearchDestination(e.target.value)}
+                  onKeyDown={handleKeyDown}
                 />
               </div>
               

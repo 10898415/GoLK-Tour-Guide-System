@@ -279,7 +279,7 @@ export default function TourMatePage() {
                 {message.sender === 'bot' && (
                   <div className="w-8 h-8 relative rounded-full overflow-hidden flex-shrink-0 mr-2">
                     <Image 
-                      src="/images/botAvatar.png" 
+                      src="/chat.svg" 
                       alt="TourMate Avatar" 
                       fill
                       className="object-cover"

@@ -1,44 +1,10 @@
 "use client";
-import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 export default function ContactPage() {
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-    }, 1500);
-  };
 
   const handleChatbotRedirect = () => {
     router.push('/tourmate');
@@ -59,212 +25,205 @@ export default function ContactPage() {
           <div className="container mx-auto px-6">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Contact Us</h1>
             <p className="text-xl text-white/90 max-w-2xl">
-              We'd love to hear from you! Reach out with questions, feedback, or suggestions.
+              Learn more about GOLK Tourist Guide and how to get in touch
             </p>
           </div>
         </div>
       </div>
 
-      {/* Contact Form and Info Section */}
+      {/* Contact Information Section */}
       <div className="container mx-auto px-6 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
+          {/* About Project */}
           <div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Send Us a Message</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">About This Project</h2>
             
-            {submitStatus === 'success' ? (
-              <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-6">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <h3 className="ml-3 text-lg font-bold text-gray-800">Message Sent Successfully!</h3>
-                </div>
-                <p className="text-gray-600 mb-4">
-                  Thank you for reaching out. We've received your message and will get back to you as soon as possible.
-                </p>
-                <button
-                  onClick={() => setSubmitStatus(null)}
-                  className="text-emerald-600 font-medium hover:text-emerald-800"
-                >
-                  Send another message
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-colors"
-                    placeholder="Enter your full name"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-colors"
-                    placeholder="Enter your email address"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-colors"
-                    placeholder="What is your message about?"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows="5"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-colors resize-none"
-                    placeholder="Please describe your inquiry or feedback in detail..."
-                  ></textarea>
-                </div>
-                
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`w-full py-3 px-4 rounded-lg text-white font-medium transition-colors ${
-                    isSubmitting 
-                      ? 'bg-gray-400 cursor-not-allowed' 
-                      : 'bg-emerald-600 hover:bg-emerald-700'
-                  }`}
-                >
-                  {isSubmitting ? (
-                    <span className="flex items-center justify-center">
-                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Sending...
-                    </span>
-                  ) : 'Send Message'}
-                </button>
-              </form>
-            )}
-          </div>
-          
-          {/* Contact Information */}
-          <div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Other Ways to Connect</h2>
-            
-            <div className="bg-white rounded-xl shadow-md p-6 mb-8">
-              <h3 className="text-lg font-bold text-gray-800 mb-4">Contact Information</h3>
-              
+            <div className="bg-white p-8 rounded-xl shadow-md mb-8">
+              <p className="text-gray-600 mb-4">
+                Go-LK Tourist Guide is a final year project developed as part of the BSc (Hons) in Software Engineering program.
+              </p>
+              <p className="text-gray-600 mb-4">
+                This project was created to help tourists in Sri Lanka find accurate, up-to-date information about accommodations, attractions, and emergency services in one convenient place.
+              </p>
+              <p className="text-gray-600">
+                The system is powered by AI and a Neo4j graph database to provide personalized recommendations and real-time information to travelers.
+              </p>
+            </div>
+
+            <h3 className="text-xl font-bold text-gray-800 mb-4">Project Information</h3>
+            <div className="bg-white p-6 rounded-xl shadow-md">
               <div className="space-y-4">
                 <div className="flex items-start">
                   <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                   </div>
                   <div className="ml-4">
-                    <h4 className="font-bold text-gray-800">Email</h4>
-                    <a href="mailto:contact@golktourguide.com" className="text-emerald-600 hover:text-emerald-800">
-                      contact@golktourguide.com
-                    </a>
+                    <h4 className="font-bold text-gray-800">Developer</h4>
+                    <p className="text-gray-600">Jayasanka Ariyaratne</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
-                <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                     </svg>
                   </div>
                   <div className="ml-4">
-                    <h4 className="font-bold text-gray-800">Location</h4>
-                    <p className="text-gray-600">Department of Software Engineering,<br />University of Plymouth,<br />United Kingdom</p>
+                    <h4 className="font-bold text-gray-800">University</h4>
+                    <p className="text-gray-600">Plymouth University (NSBM Green University)</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <h4 className="font-bold text-gray-800">Supervisor</h4>
+                    <p className="text-gray-600">Ms. Dulanjali Wijesekara</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <h4 className="font-bold text-gray-800">Project Year</h4>
+                    <p className="text-gray-600">2024/2025</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <h4 className="font-bold text-gray-800">Degree Program</h4>
+                    <p className="text-gray-600">BSc (Hons) in Software Engineering</p>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+          
+          {/* GitHub and Project Links */}
+          <div>
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">Project Resources</h2>
             
-            {/* FAQ Section */}
+            <div className="bg-white rounded-xl shadow-md p-6 mb-8">
+              <h3 className="text-lg font-bold text-gray-800 mb-4">GitHub Repository</h3>
+              <p className="text-gray-600 mb-4">
+                This project is open source. You can view the source code, contribute, or report issues through the GitHub repository.
+              </p>
+              <a 
+                href="https://github.com/yourusername/golk-tourist-guide" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg transition-colors"
+              >
+                <svg className="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                  <path fillRule="evenodd" clipRule="evenodd" d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.207 11.387.6.113.793-.258.793-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.73.083-.73 1.205.085 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.195.69.8.574C20.565 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+                View on GitHub
+              </a>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-md p-6 mb-8">
+              <h3 className="text-lg font-bold text-gray-800 mb-4">Technology Stack</h3>
+              <ul className="space-y-2">
+                
+                <li className="flex items-center">
+                  <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                    <svg className="h-5 w-5 text-green-600" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M13.95 13.5h-3.9c-.152 0-.3.049-.424.14-.124.09-.225.221-.285.37l-1.95 5.5c-.1.266.03.56.29.66.252.081.528-.063.63-.32l1.854-5.22h3.235c.153 0 .3-.05.426-.142.125-.092.225-.222.286-.372l2.68-7.5c.086-.241.016-.512-.177-.68-.193-.17-.48-.186-.69-.037l-8.574 6.07h-3.38c-.152 0-.3.05-.424.141-.125.091-.225.222-.285.371l-1.95 5.5c-.1.266.03.56.29.66.252.081.528-.063.63-.32l1.854-5.22h3.235c.153 0 .3-.05.426-.142.125-.092.225-.222.286-.372l2.68-7.5c.086-.241.016-.512-.177-.68-.193-.17-.48-.186-.69-.037l-8.573 6.07h-3.313c-.267 0-.481.21-.481.47 0 .26.214.47.481.47h3.5c.152 0 .3-.49.424-.14.124-.091.225-.221.285-.37l1.95-5.5c.1-.266-.03-.56-.29-.66-.252-.081-.528.063-.63.32L6.385 12h-3.214L11 4.52 8.5 11.5h3.95L15 4.52z" />
+                    </svg>
+                  </div>
+                  <span className="text-gray-700">Neo4j (Graph database)</span>
+                </li>
+                <li className="flex items-center">
+                  <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                    <svg className="h-5 w-5 text-purple-600" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M16.934 8.519a1.044 1.044 0 0 1 .303.23c.265.301.5.643.479 1.061-.21.404-.441.578-.857.584a2.822 2.822 0 0 1-.549-.067 3.997 3.997 0 0 0-.709-.116c-.594-.064-1.004.166-1.218.6-.206.416-.15.842.194 1.223a1.699 1.699 0 0 0 .14.17c.381.43.885.863 1.343 1.309.464.452.846.943 1.154 1.541.301.599.43 1.199.365 1.829-.073.711-.357 1.329-.978 1.794-.668.486-1.4.684-2.25.423-.817-.235-1.345-.781-1.399-1.599-.02-.339.066-.689.263-1.049.283-.524.745-.995 1.307-1.389.271-.189.511-.395.555-.676a.915.915 0 0 0-.113-.684c-.119-.17-.279-.307-.393-.465-.36-.497-.496-1.032-.361-1.644.131-.576.489-1.044 1.058-1.299.273-.122.552-.2.813-.349a1.331 1.331 0 0 0 .241-.214c.093-.108.182-.221.252-.339a.93.93 0 0 0 .088-.365c-.004-.113-.037-.212-.121-.3zm-3.496 6.676a2.651 2.651 0 0 0-.262.209c-.457.415-.783.959-.974 1.533-.051.154-.08.304-.08.461.001.141.02.245.129.349.249.226.657.225.9-.004a.877.877 0 0 0 .21-.37 2.545 2.545 0 0 0-.083-.95c-.05-.216-.139-.424-.28-.603-.106-.131-.24-.214-.33-.288l-.232-.179z" />
+                      <path d="M11.55 20.649c-1.67-.359-3.197-.978-4.556-1.976A10.003 10.003 0 0 1 3.132 14.6c-.819-1.966-1.089-3.996-.734-6.094.225-1.32.706-2.544 1.426-3.645 1.095-1.687 2.587-2.967 4.334-3.9 1.455-.78 3.017-1.213 4.694-1.208 1.699.008 3.307.458 4.766 1.337 1.599.961 2.894 2.252 3.855 3.839.778 1.287 1.272 2.677 1.447 4.184.181 1.568-.034 3.016-.65 4.434-.935 2.157-2.546 3.71-4.41 4.895a14.655 14.655 0 0 1-5.446 2.034 15.677 15.677 0 0 1-1.873.172z" />
+                    </svg>
+                  </div>
+                  <span className="text-gray-700">Python</span>
+                </li>
+                <li className="flex items-center">
+                  <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center mr-3">
+                    <svg className="h-5 w-5 text-yellow-600" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073z" />
+                    </svg>
+                  </div>
+                  <span className="text-gray-700">AI (LLM Integration)</span>
+                </li>
+                <li className="flex items-center">
+                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                    <svg className="h-5 w-5 text-blue-600" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M11.572 0c-.176 0-.31.001-.358.007-.092.016-.19.057-.282.11-.22.127-.506.47-.986 1.01-.792.865-1.965 2.145-3.158 3.386-2.895 3.008-6.412 6.652-6.788 7.04-1.158 1.204-1.545 2.596-1.045 3.927.35.935 1.055 1.73 1.867 2.22.345.21.703.35 1.01.41.545.106 1.235.075 1.89-.07l.026-.007.624-.195c.992-.315 2.371-.751 3.844-1.25 2.953-.996 5.694-2.097 7.628-3.054 2.158-1.08 3.315-1.935 3.674-2.79.113-.27.127-.492.089-.7l-.007-.045c-.085-.413-.442-.794-.86-1.015-.647-.341-1.347-.373-1.999-.297a11.11 11.11 0 0 0-.888.176l-.477.12c-1.06.28-2.395.629-3.516.93-1.736.473-3.634.928-4.287 1.075" />
+                    </svg>
+                  </div>
+                  <span className="text-gray-700">Next.js</span>
+                </li>
+              </ul>
+            </div>
+
             <div className="bg-white rounded-xl shadow-md p-6">
-              <h3 className="text-lg font-bold text-gray-800 mb-4">Frequently Asked Questions</h3>
-              
-              <div className="space-y-4">
-                <div className="border-b border-gray-200 pb-4">
-                  <h4 className="font-bold text-gray-800 mb-2">How do I start using TourMate?</h4>
-                  <p className="text-gray-600 text-sm">
-                    Simply navigate to the TourMate page and start chatting with our AI assistant. 
-                    No registration or login required!
-                  </p>
-                </div>
-                
-                <div className="border-b border-gray-200 pb-4">
-                  <h4 className="font-bold text-gray-800 mb-2">Is TourMate available offline?</h4>
-                  <p className="text-gray-600 text-sm">
-                    Currently, TourMate requires an internet connection to function. We're exploring 
-                    options for limited offline functionality in future updates.
-                  </p>
-                </div>
-                
-                <div className="border-b border-gray-200 pb-4">
-                  <h4 className="font-bold text-gray-800 mb-2">How up-to-date is TourMate's information?</h4>
-                  <p className="text-gray-600 text-sm">
-                    We regularly update our database to ensure TourMate provides the most current 
-                    information about accommodations, attractions, and services in Sri Lanka.
-                  </p>
-                </div>
-                
-                <div>
-                  <h4 className="font-bold text-gray-800 mb-2">Can I use TourMate for other countries?</h4>
-                  <p className="text-gray-600 text-sm">
-                    Currently, TourMate is specifically designed for Sri Lanka. We may expand to 
-                    other destinations in the future.
-                  </p>
-                </div>
-              </div>
+              <h3 className="text-lg font-bold text-gray-800 mb-4">Connect with TourMate</h3>
+              <p className="text-gray-600 mb-4">
+                The best way to experience GOLK Tourist Guide is to interact with TourMate, our AI-powered travel assistant.
+              </p>
+              <button
+                onClick={handleChatbotRedirect}
+                className="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition-colors flex items-center justify-center"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                </svg>
+                Chat with TourMate
+              </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Chat with TourMate CTA */}
-      <div className="bg-emerald-700 py-12">
+      {/* University Affiliation */}
+      <div className="bg-gray-50 py-12">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-2xl font-bold text-white mb-4">Have a Question About Sri Lanka?</h2>
-          <p className="text-white/90 max-w-2xl mx-auto mb-6">
-            Get immediate answers from our AI-powered assistant, available 24/7.
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">University Affiliation</h2>
+          <div className="flex justify-center items-center mb-6 space-x-8">
+            <div className="w-24 h-24 relative">
+              <Image 
+                src="/images/nsbm-logo.png" 
+                alt="NSBM Logo" 
+                fill
+                className="object-contain"
+              />
+            </div>
+            <div className="w-24 h-24 relative">
+              <Image 
+                src="/images/plymouth.png" 
+                alt="Plymouth University Logo" 
+                fill
+                className="object-contain"
+              />
+            </div>
+          </div>
+          <p className="text-gray-600 max-w-2xl mx-auto mb-4">
+            This project was developed as the final year project of BSc (Hons) in Software Engineering 
+            program at NSBM Green University that offered by Plymouth University, UK.
           </p>
-          <button
-            onClick={handleChatbotRedirect}
-            className="bg-white text-emerald-700 hover:bg-gray-100 py-3 px-8 rounded-lg font-medium transition-colors"
-          >
-            Chat with TourMate Now
-          </button>
+
         </div>
       </div>
     </div>
