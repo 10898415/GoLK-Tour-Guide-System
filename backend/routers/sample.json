@@ -284,6 +284,69 @@
     },{
       "question": "Which areas have the least number of tourists but offer great attractions (hidden paradise)?",
       "cypher_query": "OPTIONAL MATCH (a:Area)-[:CONSISTED_WITH]->(p:Place) WHERE p.Description CONTAINS 'underrated' OR p.Description CONTAINS 'quiet' OR p.Description CONTAINS 'hidden' RETURN a.Areas, p.Place_To_Visit, p.Description ORDER BY p.Place_To_Visit;"
+    },{
+      "question": "Which areas are best for backpackers (budget accommodations + adventure activities)?",
+      "cypher_query": "OPTIONAL MATCH (a:Area)-[:HAS_ACCOMODATION]->(acc:Accomadation) OPTIONAL MATCH (a)-[:CONSISTED_WITH]->(p:Place) WHERE acc.Type CONTAINS 'Budget' AND p.Activity_Type CONTAINS 'Outdoor' RETURN a.Areas, acc.Accommodation_Place_Name, acc.Rating, p.Place_To_Visit, p.Activity_Type ORDER BY acc.Rating DESC;"
+    },{
+      "question": "Which areas have cultural festivals throughout the year?",
+      "cypher_query": "OPTIONAL MATCH (a:Area)-[:CONSISTED_WITH]->(p:Place) WHERE p.Description CONTAINS 'festival' OR p.Description CONTAINS 'celebration' OR p.Description CONTAINS 'cultural event' RETURN a.Areas, p.Place_To_Visit, p.Description ORDER BY p.Place_To_Visit;"
+    },{
+      "question": "Find the top 3 areas with the most diverse range of activities, showing the distribution of activity types",
+      "cypher_query": "OPTIONAL MATCH (a:Area)-[:CONSISTED_WITH]->(p:Place) WITH a, p.Activity_Type AS activity, COUNT(p) AS activity_count WITH a, COLLECT({activity: activity, count: activity_count}) AS activity_distribution RETURN a.Areas, activity_distribution, SIZE(activity_distribution) AS diversity_score ORDER BY diversity_score DESC LIMIT 3"
+    },{
+      "question": "Analyze the ethnic composition of districts along a travel route.",
+      "cypher_query": "OPTIONAL MATCH path = shortestPath((start:Area {Areas: 'Colombo'})-[:HAS_DISTANCE*]-(end:Area {Areas: 'Trincomalee'})) WITH [area IN nodes(path) | area.Areas] AS route OPTIONAL MATCH (a:Area)-[:LOCATED_IN]->(d:District) WHERE a.Areas IN route RETURN route, COLLECT({district: d.District, sinhalese: d.Sinhalese, tamils: toFloat(d.Sri_Lankan_Tamils) + toFloat(d.Indian_Tamils), moors: d.Sri_Lankan_Moors, language: d.Most_Used_Language}) AS ethnic_composition"
+    },{
+      "question": "Where can I find hidden waterfall swimming holes accessible only via hikes?",
+      "cypher_query": "OPTIONAL MATCH (a:Area)-[:CONSISTED_WITH]->(p:Place) WHERE p.Description CONTAINS 'waterfall' AND p.Description CONTAINS 'hike' RETURN a.Areas AS Region, p.Place_To_Visit, p.Activity_Type ORDER BY p.Place_To_Visit; "
+    },{
+      "question": "Where can I stay in eco-pod accommodations near leopard habitats?",
+      "cypher_query": "OPTIONAL MATCH (a:Area)-[:HAS_ACCOMADATION]->(acc:Accomadation) OPTIONAL MATCH (a)-[:CONSISTED_WITH]->(p:Place) WHERE acc.Type = 'Eco-Pod' AND p.Description CONTAINS 'leopard habitat' RETURN a.Areas, acc.Accommodation_Place_Name, acc.Booking_Com_Booking_Link;"
+    },{
+      "question": "Which areas have nearby police stations and hospitals for tourist safety?",
+      "cypher_query": "OPTIONAL MATCH (a:Area)-[:HAS_POLICE]->(p:PoliceStation) OPTIONAL MATCH (a)-[:HAS_HOSPITAL]->(h:Hospital) RETURN a.Areas AS Area, p.Nearest_Police_Station AS PoliceStation, h.Nearest_Hospital AS Hospital ORDER BY a.Areas; "
+    },{
+      "question": "What are the best months to visit each area based on favorable weather?",
+      "cypher_query": "OPTIONAL MATCH (a:Area)-[:HAS_WEATHER]->(w:Weather) WHERE NOT w.Description CONTAINS 'not recommended' RETURN a.Areas AS Area, w.Month AS IdealMonth, w.Season AS Season, w.Description AS WeatherNotes ORDER BY a.Areas;"
+    },{
+      "question": "Which districts have the highest percentage of Sri Lankan Moors population?",
+      "cypher_query": "OPTIONAL MATCH (d:District) WITH d, TOFLOAT(REPLACE(d.Sri_Lankan_Moors, '%', '')) AS MoorsPercent WHERE MoorsPercent > 15 RETURN d.District AS District, d.Sri_Lankan_Moors AS PopulationPercentage, d.Most_Used_Language ORDER BY MoorsPercent DESC;"
+    },{
+      "question": "How far are popular tourist areas from each other?",
+      "cypher_query": "OPTIONAL MATCH (a1:Area)-[d:HAS_DISTANCE]->(a2:Area) WHERE a1.Areas IN ['Arugam Bay', 'Nuwara Eliya', 'Colombo'] RETURN a1.Areas AS Origin, a2.Areas AS Destination, d.Distance_in_km AS DistanceKm ORDER BY Origin;"
+    },{
+      "question": "What are Sri Lanka national emergency contact numbers?",
+      "cypher_query": "OPTIONAL MATCH (c:Country {Country: 'Sri Lanka'}) RETURN c.Police_Emergency_Service AS Police, c.Suwa_Seriya_Ambulance AS Ambulance;"
+    },{
+      "question": "Which accommodations are closest to Arugam Bay Beach?",
+      "cypher_query": "OPTIONAL MATCH (acc:Accomadation) WHERE acc.Nearby_Places CONTAINS 'Arugam Bay Beach' RETURN acc.Accommodation_Place_Name AS Accommodation, acc.Nearby_Places AS Attractions;"
+    },{
+      "question": "What are the top-rated restaurants in each area?",
+      "cypher_query": "OPTIONAL MATCH (a:Area)-[:HAS_RESTAURANT]->(r:Restaurant) WITH a, r ORDER BY TOFLOAT(r.Ratings) DESC RETURN a.Areas AS Area, COLLECT(r.Restaurant)[0] AS BestRestaurant, r.Ratings AS Rating;"
+    },{
+      "question": "Where can I find spice garden stays with farm-to-table cooking experiences?",
+      "cypher_query": "OPTIONAL MATCH (a:Area)-[:HAS_ACCOMADATION]->(acc:Accomadation) WHERE acc.Description CONTAINS 'spice' or acc.Description CONTAINS 'class' RETURN a.Areas, acc.Accommodation_Place_Name;"
+    },{
+      "question": "Which provinces have the most districts?",
+      "cypher_query": "OPTIONAL MATCH (p:Province)-[:HAS_DISTRICT]->(d:District) RETURN p.Province AS Province, COUNT(d) AS DistrictCount ORDER BY DistrictCount DESC;"
+    },{
+      "question": "Which areas offer eco-friendly/sustainable accommodations?",
+      "cypher_query": "OPTIONAL MATCH (a:Area)-[:HAS_ACCOMADATION]->(acc:Accomadation) WHERE acc.Description CONTAINS 'eco-friendly' OR acc.Description CONTAINS 'sustainable' RETURN a.Areas AS Area, acc.Accommodation_Place_Name, acc.Type, acc.Description ORDER BY acc.Rating DESC;"
+    },{
+      "question": "Which restaurants serve traditional Sri Lankan cuisine?",
+      "cypher_query": "OPTIONAL MATCH (a:Area)-[:HAS_RESTAURANT]->(r:Restaurant) WHERE r.Restaurant CONTAINS 'Traditional' OR r.Description CONTAINS 'Sri Lankan cuisine' RETURN a.Areas, r.Restaurant, r.Ratings, r.Google_map_link ORDER BY TOFLOAT(r.Ratings) DESC;"
+    },{
+      "question": "Which areas have public transportation hubs?",
+      "cypher_query": "OPTIONAL MATCH (a:Area)-[:CONSISTED_WITH]->(p:Place) WHERE p.Description CONTAINS 'bus' OR p.Description CONTAINS 'train' OR p.Description CONTAINS 'transport hub' RETURN a.Areas, p.Place_To_Visit, p.Description ORDER BY a.Areas;"
+    },{
+      "question": "Which areas have places to visit that are good for hiking, trekking, or are easily accessible?",
+      "cypher_query": "OPTIONAL MATCH (a:Area)-[:CONSISTED_WITH]->(p:Place) WHERE p.Description CONTAINS 'hike' OR p.Description CONTAINS 'accessible' OR p.Description CONTAINS 'trek' RETURN a.Areas, p.Place_To_Visit, p.Description ORDER BY p.Place_To_Visit;"
+    },{
+      "question": "Where can tourists participate in community-based tourism?",
+      "cypher_query": "OPTIONAL MATCH (a:Area)-[:CONSISTED_WITH]->(p:Place) WHERE p.Description CONTAINS 'community' OR p.Description CONTAINS 'local village experience' OR p.Description CONTAINS 'village experience' OR p.Description CONTAINS 'village' RETURN a.Areas, p.Place_To_Visit, p.Description ORDER BY a.Areas; "
+    },{
+      "question": "Which areas have both surfing spots and yoga retreats?",
+      "cypher_query": "OPTIONAL MATCH (a:Area)-[:CONSISTED_WITH]->(surf:Place) MATCH (a)-[:CONSISTED_WITH]->(yoga:Place) WHERE surf.Description CONTAINS 'surfing' AND yoga.Description CONTAINS 'yoga' RETURN a.Areas, surf.Place_To_Visit AS SurfSpot, yoga.Place_To_Visit AS YogaRetreat;"
     }
   ]
 }
