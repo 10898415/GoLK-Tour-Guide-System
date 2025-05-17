@@ -1,170 +1,304 @@
 db_structure = """
     The below is the cypher query to create the database structure for the prompts
     
-        // Create unique constraints
-        CREATE CONSTRAINT District_District_uniq IF NOT EXISTS 
-        FOR (n:District) REQUIRE (n.District) IS UNIQUE;
-        CREATE CONSTRAINT Areas_Area_uniq IF NOT EXISTS 
-        FOR (n:Area) REQUIRE (n.Areas) IS UNIQUE;
-        CREATE CONSTRAINT Place_To_Visit_Place_uniq IF NOT EXISTS 
-        FOR (n:Place) REQUIRE (n.Place_To_Visit) IS UNIQUE;
-        CREATE CONSTRAINT Restaurant_Restaurant_uniq IF NOT EXISTS 
-        FOR (n:Restaurant) REQUIRE (n.Restaurant) IS UNIQUE;
-        CREATE CONSTRAINT Description_Weather_uniq IF NOT EXISTS 
-        FOR (n:Weather) REQUIRE (n.Description) IS UNIQUE;
-        CREATE CONSTRAINT Accommodation_Place_Name_Accomadation_uniq IF NOT EXISTS 
-        FOR (n:Accomadation) REQUIRE (n.Accommodation_Place_Name) IS UNIQUE;
-        CREATE CONSTRAINT Province_Province_uniq IF NOT EXISTS 
-        FOR (n:Province) REQUIRE (n.Province) IS UNIQUE;
-        CREATE CONSTRAINT Nearest_Police_Station_PoliceStation_uniq IF NOT EXISTS 
-        FOR (n:PoliceStation) REQUIRE (n.Nearest_Police_Station) IS UNIQUE;
-        CREATE CONSTRAINT Nearest_Hospital_Hospital_uniq IF NOT EXISTS 
-        FOR (n:Hospital) REQUIRE (n.Nearest_Hospital) IS UNIQUE;
-        CREATE CONSTRAINT Country_Country_uniq IF NOT EXISTS 
-        FOR (n:Country) REQUIRE (n.Country) IS UNIQUE;
-        
-        // Load District nodes
-        LOAD CSV WITH HEADERS FROM 'file:///DistrictEthnicity.csv' AS row 
-        MERGE (d:District {District: row.District})
-        ON CREATE SET 
-           d.District = row.District,
-           d.Sinhalese = row.Sinhalese, 
-           d.Sri_Lankan_Tamils = row.Sri_Lankan_Tamils, 
-           d.Indian_Tamils = row.Indian_Tamils, 
-           d.Sri_Lankan_Moors = row.Sri_Lankan_Moors, 
-           d.Others = row.Others, 
-           d.Most_Used_Language = row.Most_Used_Language;
-        
-        // Load Area nodes
-        LOAD CSV WITH HEADERS FROM 'file:///areas.csv' AS row 
-        MERGE (a:Area {Areas: row.Areas})
-        ON CREATE SET 
-           a.Areas = row.Areas,
-           a.Description = row.Description, 
-           a.Population = toInteger(trim(row.Population));
-        
-        // Load Place nodes
-        LOAD CSV WITH HEADERS FROM 'file:///places.csv' AS row 
-        MERGE (p:Place {Place_To_Visit: row.Place_To_Visit})
-        ON CREATE SET 
-           p.Place_To_Visit = row.Place_To_Visit,
-           p.Activity_Type = row.Activity_Type, 
-           p.Description = row.Description;
-        
-        // Load Restaurant nodes
-        LOAD CSV WITH HEADERS FROM 'file:///restaurants.csv' AS row 
-        MERGE (r:Restaurant {Restaurant: row.Restaurant})
-        ON CREATE SET 
-           r.Restaurant = row.Restaurant,
-           r.Ratings = row.Ratings, 
-           r.Google_map_link = row.Google_map_link;
-        
-        // Load Weather nodes
-        LOAD CSV WITH HEADERS FROM 'file:///weather.csv' AS row 
-        MERGE (w:Weather {Description: row.Description})
-        ON CREATE SET 
-           w.Description = row.Description,
-           w.Month = row.Month, 
-           w.Season = row.Season;
-        
-        // Load Accommodation nodes
-        LOAD CSV WITH HEADERS FROM 'file:///accomadation.csv' AS row 
-        MERGE (a:Accomadation {Accommodation_Place_Name: row.Accommodation_Place_Name})
-        ON CREATE SET 
-           a.Accommodation_Place_Name = row.Accommodation_Place_Name,
-           a.Rating = row.Rating, 
-           a.Type = row.Type, 
-           a.Description = row.Description, 
-           a.Nearby_Places = row.Nearby_Places, 
-           a.Booking_Com_Booking_Link = row.Booking_Com_Booking_Link;
-        
-        // Load Province nodes
-        LOAD CSV WITH HEADERS FROM 'file:///DistrictEthnicity.csv' AS row 
-        MERGE (p:Province {Province: row.Province})
-        ON CREATE SET
-           p.Province = row.Province;
-        
-        // Add Police Station nodes
-        LOAD CSV WITH HEADERS FROM 'file:///PoliceStations.csv' AS row 
-        MERGE (p:PoliceStation {Nearest_Police_Station: row.Nearest_Police_Station})
-        ON CREATE SET 
-           p.Nearest_Police_Station = row.Nearest_Police_Station,
-           p.Contact_Number = toInteger(trim(row.Contact_Number)),
-           p.Google_Map_Link = row.Google_Map_Link;
-        
-        // Add Hospital nodes
-        LOAD CSV WITH HEADERS FROM 'file:///Hospitals.csv' AS row 
-        MERGE (h:Hospital {Nearest_Hospital: row.Nearest_Hospital})
-        ON CREATE SET 
-           h.Nearest_Hospital = row.Nearest_Hospital,
-           h.Contact_Number = toInteger(trim(row.Contact_Number)),
-           h.Google_Map_Link = row.Google_Map_Link;
-        
-        // Add Country nodes
-        LOAD CSV WITH HEADERS FROM 'file:///SriLanka.csv' AS row 
-        MERGE (c:Country {Country: row.Country})
-        ON CREATE SET 
-           c.Country = row.Country,
-           c.Suwa_Seriya_Ambulance = toInteger(trim(row.Suwa_Seriya_Ambulance)),
-           c.Police_Emergency_Service = toInteger(trim(row.Police_Emergency_Service)),
-           c.Description = row.Description,
-           c.Nationality = row.Nationality,
-           c.Currency = row.Currency;
-        
-        // Create relationships
-        LOAD CSV WITH HEADERS FROM 'file:///areas.csv' AS row 
-        MATCH (a:Area {Areas: row.Areas}) 
-        MATCH (d:District {District: row.District}) 
-        MERGE (a)-[:LOCATED_IN]->(d);
-        
-        LOAD CSV WITH HEADERS FROM 'file:///places.csv' AS row 
-        MATCH (a:Area {Areas: row.Area}) 
-        MATCH (p:Place {Place_To_Visit: row.Place_To_Visit}) 
-        MERGE (a)-[:CONSISTED_WITH]->(p);
-        
-        LOAD CSV WITH HEADERS FROM 'file:///restaurants.csv' AS row 
-        MATCH (a:Area {Areas: row.Area}) 
-        MATCH (r:Restaurant {Restaurant: row.Restaurant}) 
-        MERGE (a)-[:HAS_RESTAURANT]->(r);
-        
-        LOAD CSV WITH HEADERS FROM 'file:///weather.csv' AS row 
-        MATCH (a:Area {Areas: row.Area}) 
-        MATCH (w:Weather {Description: row.Description}) 
-        MERGE (a)-[:HAS_WEATHER]->(w);
-        
-        LOAD CSV WITH HEADERS FROM 'file:///accomadation.csv' AS row 
-        MATCH (a:Area {Areas: row.Area}) 
-        MATCH (acc:Accomadation {Accommodation_Place_Name: row.Accommodation_Place_Name}) 
-        MERGE (a)-[:HAS_ACCOMADATION]->(acc);
-        
-        LOAD CSV WITH HEADERS FROM 'file:///DistrictEthnicity.csv' AS row 
-        MATCH (p:Province {Province: row.Province}) 
-        MATCH (d:District {District: row.District}) 
-        MERGE (p)-[:HAS_DISTRICT]->(d);
-        
-        // Distance between Areas
-        LOAD CSV WITH HEADERS FROM 'file:///City_Distances.csv' AS row 
-        MATCH (a1:Area {Areas: row.Location_1}) 
-        MATCH (a2:Area {Areas: row.Location_2}) 
-        MERGE (a1)-[:HAS_DISTANCE {Distance_in_km: toFloat(trim(row.Distance_in_km))}]->(a2);
-        
-        // Areas to Police Stations
-        LOAD CSV WITH HEADERS FROM 'file:///PoliceStations.csv' AS row 
-        MATCH (a:Area {Areas: row.Areas}) 
-        MATCH (p:PoliceStation {Nearest_Police_Station: row.Nearest_Police_Station}) 
-        MERGE (a)-[:HAS_POLICE]->(p);
-        
-        // Areas to Hospitals
-        LOAD CSV WITH HEADERS FROM 'file:///Hospitals.csv' AS row 
-        MATCH (a:Area {Areas: row.Areas}) 
-        MATCH (h:Hospital {Nearest_Hospital: row.Nearest_Hospital}) 
-        MERGE (a)-[:HAS_HOSPITAL]->(h);
-        
-        // Country to Province relationship
-        LOAD CSV WITH HEADERS FROM 'file:///DistrictEthnicity.csv' AS row 
-        MATCH (c:Country {Country: row.Country}) 
-        MATCH (p:Province {Province: row.Province}) 
-        MERGE (c)-[:HAS_PROVINCE]->(p);
+        :param {
+      // Define the file path root and the individual file names required for loading.
+      // https://neo4j.com/docs/operations-manual/current/configuration/file-locations/
+      file_path_root: 'file:///', // Change this to the folder your script can access the files at.
+      file_0: 'DistrictEthnicity.csv',
+      file_1: 'areas.csv',
+      file_2: 'places.csv',
+      file_3: 'restaurants.csv',
+      file_4: 'weather.csv',
+      file_5: 'accomadation.csv',
+      file_6: 'PoliceStations.csv',
+      file_7: 'Hospitals.csv',
+      file_8: 'SriLanka.csv',
+      file_9: 'City_Distances.csv'
+    };
+    
+    // CONSTRAINT creation
+    // -------------------
+    //
+    // Create node uniqueness constraints, ensuring no duplicates for the given node label and ID property exist in the database. This also ensures no duplicates are introduced in future.
+    //
+    // NOTE: The following constraint creation syntax is generated based on the current connected database version 5.27.0.
+    CREATE CONSTRAINT `District_District_uniq` IF NOT EXISTS
+    FOR (n: `District`)
+    REQUIRE (n.`District`) IS UNIQUE;
+    CREATE CONSTRAINT `Areas_Area_uniq` IF NOT EXISTS
+    FOR (n: `Area`)
+    REQUIRE (n.`Areas`) IS UNIQUE;
+    CREATE CONSTRAINT `Place_To_Visit_Place_uniq` IF NOT EXISTS
+    FOR (n: `Place`)
+    REQUIRE (n.`Place_To_Visit`) IS UNIQUE;
+    CREATE CONSTRAINT `Restaurant_Restaurant_uniq` IF NOT EXISTS
+    FOR (n: `Restaurant`)
+    REQUIRE (n.`Restaurant`) IS UNIQUE;
+    CREATE CONSTRAINT `Description_Weather_uniq` IF NOT EXISTS
+    FOR (n: `Weather`)
+    REQUIRE (n.`Description`) IS UNIQUE;
+    CREATE CONSTRAINT `Accommodation_Place_Name_Accomadation_uniq` IF NOT EXISTS
+    FOR (n: `Accomadation`)
+    REQUIRE (n.`Accommodation_Place_Name`) IS UNIQUE;
+    CREATE CONSTRAINT `Province_Province_uniq` IF NOT EXISTS
+    FOR (n: `Province`)
+    REQUIRE (n.`Province`) IS UNIQUE;
+    CREATE CONSTRAINT `Nearest_Police_Station_PoliceStation_uniq` IF NOT EXISTS
+    FOR (n: `PoliceStation`)
+    REQUIRE (n.`Nearest_Police_Station`) IS UNIQUE;
+    CREATE CONSTRAINT `Nearest_Hospital_Hospital_uniq` IF NOT EXISTS
+    FOR (n: `Hospital`)
+    REQUIRE (n.`Nearest_Hospital`) IS UNIQUE;
+    CREATE CONSTRAINT `Country_Country_uniq` IF NOT EXISTS
+    FOR (n: `Country`)
+    REQUIRE (n.`Country`) IS UNIQUE;
+    
+    :param {
+      idsToSkip: []
+    };
+    
+    // NODE load
+    // ---------
+    //
+    // Load nodes in batches, one node label at a time. Nodes will be created using a MERGE statement to ensure a node with the same label and ID property remains unique. Pre-existing nodes found by a MERGE statement will have their other properties set to the latest values encountered in a load file.
+    //
+    // NOTE: Any nodes with IDs in the 'idsToSkip' list parameter will not be loaded.
+    LOAD CSV WITH HEADERS FROM ($file_path_root + $file_0) AS row
+    WITH row
+    WHERE NOT row.`District` IN $idsToSkip AND NOT row.`District` IS NULL
+    CALL {
+      WITH row
+      MERGE (n: `District` { `District`: row.`District` })
+      SET n.`District` = row.`District`
+      SET n.`Sinhalese` = row.`Sinhalese`
+      SET n.`Others` = row.`Others`
+      SET n.`Sri_Lankan_Tamils` = row.`Sri_Lankan_Tamils`
+      SET n.`Indian_Tamils` = row.`District`
+      SET n.`Sri_Lankan_Moors` = row.`Sri_Lankan_Moors`
+      SET n.`Most_Used_Language` = row.`Most_Used_Language`
+    } IN TRANSACTIONS OF 10000 ROWS;
+    
+    LOAD CSV WITH HEADERS FROM ($file_path_root + $file_1) AS row
+    WITH row
+    WHERE NOT row.`Areas` IN $idsToSkip AND NOT row.`Areas` IS NULL
+    CALL {
+      WITH row
+      MERGE (n: `Area` { `Areas`: row.`Areas` })
+      SET n.`Areas` = row.`Areas`
+      SET n.`Description` = row.`Description`
+      SET n.`Population` = toInteger(trim(row.`Population`))
+    } IN TRANSACTIONS OF 10000 ROWS;
+    
+    LOAD CSV WITH HEADERS FROM ($file_path_root + $file_2) AS row
+    WITH row
+    WHERE NOT row.`Place_To_Visit` IN $idsToSkip AND NOT row.`Place_To_Visit` IS NULL
+    CALL {
+      WITH row
+      MERGE (n: `Place` { `Place_To_Visit`: row.`Place_To_Visit` })
+      SET n.`Place_To_Visit` = row.`Place_To_Visit`
+      SET n.`Description` = row.`Description`
+      SET n.`Activity_Type` = row.`Activity_Type`
+    } IN TRANSACTIONS OF 10000 ROWS;
+    
+    LOAD CSV WITH HEADERS FROM ($file_path_root + $file_3) AS row
+    WITH row
+    WHERE NOT row.`Restaurant` IN $idsToSkip AND NOT row.`Restaurant` IS NULL
+    CALL {
+      WITH row
+      MERGE (n: `Restaurant` { `Restaurant`: row.`Restaurant` })
+      SET n.`Restaurant` = row.`Restaurant`
+      SET n.`Ratings` = row.`Ratings`
+      SET n.`Google_map_link` = row.`Google_map_link`
+    } IN TRANSACTIONS OF 10000 ROWS;
+    
+    LOAD CSV WITH HEADERS FROM ($file_path_root + $file_4) AS row
+    WITH row
+    WHERE NOT row.`Description` IN $idsToSkip AND NOT row.`Description` IS NULL
+    CALL {
+      WITH row
+      MERGE (n: `Weather` { `Description`: row.`Description` })
+      SET n.`Description` = row.`Description`
+      SET n.`Month` = row.`Month`
+      SET n.`Season` = row.`Season`
+    } IN TRANSACTIONS OF 10000 ROWS;
+    
+    LOAD CSV WITH HEADERS FROM ($file_path_root + $file_5) AS row
+    WITH row
+    WHERE NOT row.`Accommodation_Place_Name` IN $idsToSkip AND NOT row.`Accommodation_Place_Name` IS NULL
+    CALL {
+      WITH row
+      MERGE (n: `Accomadation` { `Accommodation_Place_Name`: row.`Accommodation_Place_Name` })
+      SET n.`Accommodation_Place_Name` = row.`Accommodation_Place_Name`
+      SET n.`Rating` = row.`Rating`
+      SET n.`Type` = row.`Type`
+      SET n.`Description` = row.`Description`
+      SET n.`Nearby_Places` = row.`Nearby_Places`
+      SET n.`Booking_Com_Booking_Link` = row.`Booking_Com_Booking_Link`
+    } IN TRANSACTIONS OF 10000 ROWS;
+    
+    LOAD CSV WITH HEADERS FROM ($file_path_root + $file_0) AS row
+    WITH row
+    WHERE NOT row.`Province` IN $idsToSkip AND NOT row.`Province` IS NULL
+    CALL {
+      WITH row
+      MERGE (n: `Province` { `Province`: row.`Province` })
+      SET n.`Province` = row.`Province`
+    } IN TRANSACTIONS OF 10000 ROWS;
+    
+    LOAD CSV WITH HEADERS FROM ($file_path_root + $file_6) AS row
+    WITH row
+    WHERE NOT row.`Nearest_Police_Station` IN $idsToSkip AND NOT row.`Nearest_Police_Station` IS NULL
+    CALL {
+      WITH row
+      MERGE (n: `PoliceStation` { `Nearest_Police_Station`: row.`Nearest_Police_Station` })
+      SET n.`Nearest_Police_Station` = row.`Nearest_Police_Station`
+      SET n.`Contact_Number` = toInteger(trim(row.`Contact_Number`))
+      SET n.`Google_Map_Link` = row.`Google_Map_Link`
+    } IN TRANSACTIONS OF 10000 ROWS;
+    
+    LOAD CSV WITH HEADERS FROM ($file_path_root + $file_7) AS row
+    WITH row
+    WHERE NOT row.`Nearest_Hospital` IN $idsToSkip AND NOT row.`Nearest_Hospital` IS NULL
+    CALL {
+      WITH row
+      MERGE (n: `Hospital` { `Nearest_Hospital`: row.`Nearest_Hospital` })
+      SET n.`Nearest_Hospital` = row.`Nearest_Hospital`
+      SET n.`Contact_Number` = toInteger(trim(row.`Contact_Number`))
+      SET n.`Google_Map_Link` = row.`Google_Map_Link`
+    } IN TRANSACTIONS OF 10000 ROWS;
+    
+    LOAD CSV WITH HEADERS FROM ($file_path_root + $file_8) AS row
+    WITH row
+    WHERE NOT row.`Country` IN $idsToSkip AND NOT row.`Country` IS NULL
+    CALL {
+      WITH row
+      MERGE (n: `Country` { `Country`: row.`Country` })
+      SET n.`Country` = row.`Country`
+      SET n.`Description` = row.`Description`
+      SET n.`Nationality` = row.`Nationality`
+      SET n.`Currency` = row.`Currency`
+      SET n.`Suwa_Seriya_Ambulance` = toInteger(trim(row.`Suwa_Seriya_Ambulance`))
+      SET n.`Police_Emergency_Service` = toInteger(trim(row.`Police_Emergency_Service`))
+      SET n.`Government_Information_Center` = toInteger(trim(row.`Government_Information_Center`))
+      SET n.`Bomb_Disposal_Unit` = toInteger(trim(row.`Bomb_Disposal_Unit`))
+      SET n.`National_Help_Desk` = toInteger(trim(row.`National_Help_Desk`))
+      SET n.`Sri_Lanka_Tourism_Development_Authority` = toInteger(trim(row.`Sri_Lanka_Tourism_Development_Authority`))
+      SET n.`Bandaranaike_International_Airport` = toInteger(trim(row.`Bandaranaike_International_Airport`))
+      SET n.`Department_Of_Immigration` = toInteger(trim(row.`Department_Of_Immigration`))
+      SET n.`Srilankan_Airlines` = row.`Srilankan_Airlines`
+      SET n.`Sri_Lanka_Railways` = toInteger(trim(row.`Department_Of_Immigration`))
+      SET n.`Children_Helpline` = toInteger(trim(row.`Children_Helpline`))
+      SET n.`Women_Helpline` = toInteger(trim(row.`Women_Helpline`))
+      SET n.`Ministry_Of_Foreign_Affairs` = toInteger(trim(row.`Ministry_Of_Foreign_Affairs`))
+      SET n.`Ministry_Of_Health` = toInteger(trim(row.`Ministry_Of_Health`))
+      SET n.`Trilingual_Health_Line` = toInteger(trim(row.`Trilingual_Health_Line`))
+      SET n.`Ceylon_Electricity_Board` = toInteger(trim(row.`Ceylon_Electricity_Board`))
+      SET n.`National_Water_Supply_And_Drainage_Board` = toInteger(trim(row.`National_Water_Supply_And_Drainage_Board`))
+      SET n.`National_Sport` = row.`National_Sport`
+      SET n.`National_Bird` = row.`National_Bird`
+      SET n.`National_Flower` = row.`National_Flower`
+      SET n.`National_Tree` = row.`National_Tree`
+      SET n.`Official_Languages` = row.`Official_Languages`
+      SET n.`Major_Ethnic` = row.`Major_Ethnic`
+    } IN TRANSACTIONS OF 10000 ROWS;
+    
+    
+    // RELATIONSHIP load
+    // -----------------
+    //
+    // Load relationships in batches, one relationship type at a time. Relationships are created using a MERGE statement, meaning only one relationship of a given type will ever be created between a pair of nodes.
+    LOAD CSV WITH HEADERS FROM ($file_path_root + $file_1) AS row
+    WITH row 
+    CALL {
+      WITH row
+      MATCH (source: `Area` { `Areas`: row.`Areas` })
+      MATCH (target: `District` { `District`: row.`District` })
+      MERGE (source)-[r: `LOCATED_IN`]->(target)
+    } IN TRANSACTIONS OF 10000 ROWS;
+    
+    LOAD CSV WITH HEADERS FROM ($file_path_root + $file_2) AS row
+    WITH row 
+    CALL {
+      WITH row
+      MATCH (source: `Area` { `Areas`: row.`Area` })
+      MATCH (target: `Place` { `Place_To_Visit`: row.`Place_To_Visit` })
+      MERGE (source)-[r: `CONSISTED_WITH`]->(target)
+    } IN TRANSACTIONS OF 10000 ROWS;
+    
+    LOAD CSV WITH HEADERS FROM ($file_path_root + $file_3) AS row
+    WITH row 
+    CALL {
+      WITH row
+      MATCH (source: `Area` { `Areas`: row.`Area` })
+      MATCH (target: `Restaurant` { `Restaurant`: row.`Restaurant` })
+      MERGE (source)-[r: `HAS_RESTAURANT`]->(target)
+    } IN TRANSACTIONS OF 10000 ROWS;
+    
+    LOAD CSV WITH HEADERS FROM ($file_path_root + $file_4) AS row
+    WITH row 
+    CALL {
+      WITH row
+      MATCH (source: `Area` { `Areas`: row.`Area` })
+      MATCH (target: `Weather` { `Description`: row.`Description` })
+      MERGE (source)-[r: `HAS_WEATHER`]->(target)
+    } IN TRANSACTIONS OF 10000 ROWS;
+    
+    LOAD CSV WITH HEADERS FROM ($file_path_root + $file_5) AS row
+    WITH row 
+    CALL {
+      WITH row
+      MATCH (source: `Area` { `Areas`: row.`Area` })
+      MATCH (target: `Accomadation` { `Accommodation_Place_Name`: row.`Accommodation_Place_Name` })
+      MERGE (source)-[r: `HAS_ACCOMADATION`]->(target)
+    } IN TRANSACTIONS OF 10000 ROWS;
+    
+    LOAD CSV WITH HEADERS FROM ($file_path_root + $file_0) AS row
+    WITH row 
+    CALL {
+      WITH row
+      MATCH (source: `Province` { `Province`: row.`Province` })
+      MATCH (target: `District` { `District`: row.`District` })
+      MERGE (source)-[r: `HAS_DISTRICT`]->(target)
+    } IN TRANSACTIONS OF 10000 ROWS;
+    
+    LOAD CSV WITH HEADERS FROM ($file_path_root + $file_9) AS row
+    WITH row 
+    CALL {
+      WITH row
+      MATCH (source: `Area` { `Areas`: row.`Location_1` })
+      MATCH (target: `Area` { `Areas`: row.`Location_2` })
+      MERGE (source)-[r: `HAS_DISTANCE`]->(target)
+      SET r.`Distance_in_km` = toFloat(trim(row.`Distance_in_km`))
+    } IN TRANSACTIONS OF 10000 ROWS;
+    
+    LOAD CSV WITH HEADERS FROM ($file_path_root + $file_6) AS row
+    WITH row 
+    CALL {
+      WITH row
+      MATCH (source: `Area` { `Areas`: row.`Areas` })
+      MATCH (target: `PoliceStation` { `Nearest_Police_Station`: row.`Nearest_Police_Station` })
+      MERGE (source)-[r: `HAS_POLICE`]->(target)
+    } IN TRANSACTIONS OF 10000 ROWS;
+    
+    LOAD CSV WITH HEADERS FROM ($file_path_root + $file_7) AS row
+    WITH row 
+    CALL {
+      WITH row
+      MATCH (source: `Area` { `Areas`: row.`Areas` })
+      MATCH (target: `Hospital` { `Nearest_Hospital`: row.`Nearest_Hospital` })
+      MERGE (source)-[r: `HAS_HOSPITAL`]->(target)
+    } IN TRANSACTIONS OF 10000 ROWS;
+    
+    LOAD CSV WITH HEADERS FROM ($file_path_root + $file_0) AS row
+    WITH row 
+    CALL {
+      WITH row
+      MATCH (source: `Country` { `Country`: row.`Country` })
+      MATCH (target: `Province` { `Province`: row.`Province` })
+      MERGE (source)-[r: `HAS_PROVINCE`]->(target)
+    } IN TRANSACTIONS OF 10000 ROWS;
+
         
         Note: When generating the cypher queries please make sure to do not return the nodes and relationships. please return the properties of the nodes and relationships.
         
@@ -297,6 +431,27 @@ db_structure = """
             Properties: None
             
         Use only the relationship properties that are not None.
+        
+        
+        weather Node additionaly contain these details and these are the names of the variables.
+        
+        precipitation_prob  
+        last_updated  
+        Description  
+        avg_temp  
+        avg_precip  
+        description  
+        Month  
+        precipitation  
+        avg_wind  
+        min_temp  
+        current_temp  
+        season  
+        wind_speed  
+        Season  
+        max_temp  
+        precip_prob
+        
 """
 
 settings_prompt = """

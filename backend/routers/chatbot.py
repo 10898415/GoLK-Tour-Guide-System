@@ -62,7 +62,7 @@ uri = os.getenv("NEO4J_URI")
 username = os.getenv("NEO4J_USERNAME")
 password = os.getenv("NEO4J_PASSWORD")
 openai_api_key = os.getenv("OPENAI_API_KEY")
-deployment = os.getenv("DEPLOYMENT_NAME", "gpt-4o")
+deployment = os.getenv("DEPLOYMENT_NAME", "gpt-4.1-2025-04-14")
 db_structure_prompt = db_structure
 settings_prompt = settings_prompt
 client = OpenAI(api_key=openai_api_key)
@@ -207,7 +207,11 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
 
     # Move the prompt template outside the function
     QUERY_CHAT_PROMPT = """Role and Context:
-                        You are TourMate, an AI assistant that helps users with travel-related queries about Sri Lanka.
+                        You are TourMate, an AI assistant that helps users with travel-related queries about Sri Lanka or hotels, accomadations, places, emergency, hotel related details.
+            
+                        
+                        You can provide answers only to the sri lankan context, do not provide answers for other contexts please say that you can provide answers only on the sri lankan context if user ask a question in other domains.
+                        
                         
                          Database Context:
                         ---------------
@@ -253,6 +257,7 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         ⚠️ DO NOT use single quotes in the JSON response
                         ⚠️ DO NOT include newlines within the values
                         ⚠️ Ensure the response is valid JSON format
+                        ⚠️ If user asked a question about place and all when you generate the cypher query refer key words in lower case and use them in the cypher query.
                         
                         Response Guidelines:
                         ------------------
@@ -291,6 +296,14 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         - Relevant emojis is Must in the text explanation and never mention that you refer to database by querying. 
                         -  Work as TravelGuru when providing responses.
                         
+                        please consider them as well when user ask about weather.when providing weather details please mention the location name.
+        
+                        when user ask about the emergency details please provide all details in the Country node, but if they ask about specific area related details provide that areas police station and hospital details.
+                        
+                        consider all the places visting, accomadation, restaurants are affordable and budget friendly.
+                        
+                        when providing whether try to provide weather in current month always and take all the weather details that you have in specific area.
+                        
                         # Strictly follow this setting prompts as well
                         {settings_prompt}  
                         
@@ -302,7 +315,7 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                          
                         Please consider if the users question is relevant to the chat history, if it is relevant, 
                         please provide the answer based on the chat history.If it is not relevant, please ignore the chat history.
-                        Example: If user has asked a particular location and ask a question without mentioning a new location please provide the answer based on the previous questions location
+                        Example: If user has asked a particular location and ask a question without mentioning a new location please provide the answer based on the previous questions location.
                         
                         *** Very very important: Please consider the chat history as well ***
                         
