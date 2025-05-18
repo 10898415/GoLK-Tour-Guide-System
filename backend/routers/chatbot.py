@@ -110,7 +110,7 @@ def find_similar_questions_cached(user_query: str, top_n: int = 5) -> Tuple[tupl
 
 
 def generate_query_optimized(user_question: str, session_id: str, question: Question) -> str:
-    # Create a cache key based on the question and settings
+    # Create a cache key based on the question and settings2
     cache_key = hashlib.md5(
         f"{user_question}_{question.settings.json()}".encode()
     ).hexdigest()
@@ -295,6 +295,12 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         - Never add extraneous information not directly related to the query
                         - Relevant emojis is Must in the text explanation and never mention that you refer to database by querying. 
                         -  Work as TravelGuru when providing responses.
+                        
+                        the below conditions are important:
+                        
+                        If user ask about the details about Sri Lanka only, then provide only the description about the country without generating the cypher query for it. in other scenerios you can generate cypher query as well. (Provide the key insights summary as well).
+                        
+                        If user ask for budget places in a specif area, provide the whole list of places by saying most of the places that they have are budget places. (provide all accommodations in that area)  - it is applicable for all restaurants, hotels, and places to visit.
                         
                         please consider them as well when user ask about weather.when providing weather details please mention the location name.
         
@@ -571,6 +577,8 @@ def generate_table_analysis(data: str):
                 If this data contains not only None values return 'yes'.
                 If the data only contains null values say you cannot generate an answer with data table at the moment in a creative way with emojis bit longer explanation.
                 Don't ever say, since data contains mostly null values or zeros you can't provide an answer.
+                
+                If user ask anything about sri lanka even it is not there in the graph db, you have to answer the questions
 
                 example data: 
                     [{{'a1.Areas': None, 'a2.Areas': None, 'a1.Distance_in_km': None}}]
