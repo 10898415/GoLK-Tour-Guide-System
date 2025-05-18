@@ -3,7 +3,7 @@ import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 export default function TableView({ data, insights }) {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
 
   if (!data || data.length === 0) return null;
 
@@ -15,17 +15,20 @@ export default function TableView({ data, insights }) {
     if ('Hospital' in firstRow || 'Medical_Type' in firstRow) return 'Hospitals Summary';
     if ('Restaurant' in firstRow || 'Cuisine' in firstRow) return 'Restaurants Summary';
     if ('Police_Station' in firstRow) return 'Police Stations Summary';
+    if ('Weather_Description' in firstRow) return 'Weather Summary'
     return 'Data Summary';
   };
 
+  const tableTitle = getTableTitle();
+
   return (
-    <div className="my-4 bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="my-4 bg-white rounded-lg overflow-hidden">
       <div 
         className="bg-gray-50 px-4 py-3 flex justify-between items-center cursor-pointer hover:bg-gray-100"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <h3 className="text-lg font-semibold text-gray-700">
-          {getTableTitle()}
+          {tableTitle}
         </h3>
         <button className="text-gray-500 hover:text-gray-700">
           {isExpanded ? '▼' : '▶'}
@@ -43,7 +46,7 @@ export default function TableView({ data, insights }) {
                       key={header}
                       className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                     >
-                      {header}
+                      {header.replace('_', " ")}
                     </th>
                   ))}
                 </tr>
@@ -56,18 +59,20 @@ export default function TableView({ data, insights }) {
                         key={cellIdx}
                         className="px-6 py-4 whitespace-normal text-sm text-gray-500"
                       >
-                        {typeof cell === 'string' && cell.startsWith('http') ? (
-                          <a 
-                            href={cell}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-600 hover:underline"
-                          >
-                            {cell}
-                          </a>
-                        ) : (
-                          cell
-                        )}
+                      {typeof cell === 'string' && cell.startsWith('http') ? (
+                        <a 
+                          href={cell}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:underline"
+                        >
+                          {cell}
+                        </a>
+                      ) : (typeof cell === 'number' && tableTitle === 'Weather Summary') ? (
+                        <span>{cell.toFixed(2)}</span>
+                      ) : (
+                        cell
+                      )}
                       </td>
                     ))}
                   </tr>

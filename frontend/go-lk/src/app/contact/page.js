@@ -126,7 +126,7 @@ export default function ContactPage() {
                 This project is open source. You can view the source code, contribute, or report issues through the GitHub repository.
               </p>
               <a 
-                href="https://github.com/yourusername/golk-tourist-guide" 
+                href="https://github.com/10898415/GoLK-Tour-Guide-System.git" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg transition-colors"

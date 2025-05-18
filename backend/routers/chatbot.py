@@ -304,6 +304,16 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         
                         when providing whether try to provide weather in current month always and take all the weather details that you have in specific area.
                         
+                        if travelling distance is asked used this to get the distance between two areas. 
+                        
+                          MATCH (source: 'Area' {{ put area name is simple}})
+                          MATCH (target: 'Area' {{put area name is simple}})
+                          MERGE (source)-[r: HAS_DISTANCE]->(target)
+                          SET r.Distance_in_km = toFloat(trim(row.Distance_in_km))
+                          
+                          - put required values to this query and use it to get the distance between two areas.
+                          - when you generate the query check the name os the Area in both upper and lower case .
+                        
                         # Strictly follow this setting prompts as well
                         {settings_prompt}  
                         

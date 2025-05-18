@@ -14,8 +14,8 @@ export default function TourMatePage() {
   const [language, setLanguage] = useState("English"); // Default language
   const [suggestedQuestions, setSuggestedQuestions] = useState([
     "What are the top attractions in Kandy?",
-    "Find hotels near Sigiriya",
-    "What's the weather like in Galle in December?",
+    "Find Accomadations near Sigiriya",
+    "What's the today weather in Ella?",
     "Emergency contacts in Colombo"
   ]);
   const [hasAutoSent, setHasAutoSent] = useState(false);
@@ -294,20 +294,29 @@ export default function TourMatePage() {
                       : 'bg-white shadow rounded-tl-none'
                   }`}>
                     <div className="whitespace-pre-wrap text-sm mb-2">{message.text}</div>
+                    {/* Display table data if available */}
+                    {message.tableData && (
+                      <div className="mt-2">
+                        <TableView
+                          data={message.tableData}
+                          insights={message.tableInsights}
+                        />
+                      </div>
+                    )}
                     <div className={`text-xs ${message.sender === 'user' ? 'text-emerald-100' : 'text-gray-500'}`}>
                       {message.time}
                     </div>
                   </div>
                   
                   {/* Display table data if available */}
-                  {message.tableData && (
+                  {/* {message.tableData && (
                     <div className="mt-2">
                       <TableView
                         data={message.tableData}
                         insights={message.tableInsights}
                       />
                     </div>
-                  )}
+                  )} */}
                 </div>
                 
                 {message.sender === 'user' && (
@@ -328,7 +337,7 @@ export default function TourMatePage() {
               <div className="flex items-center mb-4">
                 <div className="w-8 h-8 relative rounded-full overflow-hidden flex-shrink-0 mr-2">
                   <Image 
-                    src="/images/tourmate-avatar.png" 
+                    src="/chat.svg" 
                     alt="TourMate Avatar" 
                     fill
                     className="object-cover"
